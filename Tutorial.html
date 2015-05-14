@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Lifepak simulator</title>
+
+		
+		<link rel="stylesheet" type="text/css" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>	
+		
+
+		<script src="jquery-1.11.1.min.js"></script>
+		<script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+		<script src="jsPlumb-master/dist/js/jquery.jsPlumb-1.6.2-min.js"></script>
+		<script type="text/javascript" src="youtubepopup.js"></script>
+		<script src="Tutorial.js"></script>
+		
+		
+		<audio id="analyzingnowstandclear" src="assets/audio/analyzingnowstandclear.mp3"> </audio>
+		
+		<audio id="player" src="assets/audio/turnon.mp3"> </audio>
+		<audio id="error" src="assets/audio/error.mp3"> </audio>
+		<audio id="tick" src="assets/audio/tick.mp3"> </audio>
+		<audio id="20J" src="assets/audio/charge20J.mp3"> </audio>
+		<audio id="200J" src="assets/audio/Shock200J.mp3"> </audio>
+		<audio id="300J" src="assets/audio/Shock300J.mp3"> </audio>
+		<audio id="shockprompt" src="assets/audio/shockprompt.mp3"> </audio>
+		<audio id="shockadvised" src="assets/audio/shockadvised.mp3"> </audio>
+		<audio id="noshockadvised" src="assets/audio/noshockadvised.mp3"> </audio>
+		<audio id="removetestplug" src="assets/audio/removetestplug.mp3"> </audio>
+		<audio id="motiondetected" src="assets/audio/motiondetected.mp3"> </audio>
+		<audio id="connectelectrodes" src="assets/audio/connectelectrodes.mp3"> </audio>
+		<div class="button" style="z-index:1000" id="back"><a id="lnkBack" href="index.html" style="z-index:1000">&#60; Back</a></div>
+
+
+		<div id='time_ticker_label'>Time:</div>
+		<div id='score_label'>Score:</div>
+
+
+		<div id='time_ticker'></div>
+		<div id='score'>0</div>
+		<img  id="lifepak" src="assets/lifepak.png" style="position:absolute;left:0px;top:0px;">
+		<img class = "button " id = "OnOff" src="assets/LifePakOnOff.png" style="position:absolute; left:648px; top:139px; cursor: pointer; cursor: hand;" onclick="turnOn()">
+		<div id="MainScreen" class="button" ></div>
+		<img class="button " id ="EnergySelectLeft" src="assets/EnergySelectLeft.png" style="left:648px; top:177px; cursor: pointer; cursor: hand;" onclick="energySelectDown()">
+		<img class="button " id ="EnergySelectRight" src="assets/EnergySelectRight.png" style="left:692px; top:177px; cursor: pointer; cursor: hand;" onclick="energySelectUp()">
+		<div id="EnergyLevel" class="button" ><p class="MenuText" id="SelectEnergy">Select Biphasic Energy</p> <p class="MenuText" id="JoulesEnergy">2J</p></div>
+		<img class="button " id ="Charge" src="assets/Charge.png" style="left:648px; top:212px; cursor: pointer; cursor: hand;" onclick="charge()">
+		<img class="button " id ="ShockButton" src="assets/Shock.png" style="left:668px; top:248px; cursor: pointer; cursor: hand;" onclick="shock()">
+		<img class="button" id="ShockLight" src="assets/Light.png" style="left:650px; top:267px;">
+		<img class="button " id="AnalyzeButton" src="assets/Analyze.png" style="left:546px; top:255px; cursor: pointer; cursor: hand;" onclick="analyze()">
+		<img class="button" id="AnalyzeLight1" src="assets/Light.png" style="left:556px; top:241px;">
+		<img class="button" id="AnalyzeLight2" src="assets/Light.png" style="left:556px; top:267px;">
+		<img class="button " id="Pacer" src="assets/Pacer.png" onclick="pacer()">
+		<img class="button" id="PacerLight" src="assets/Light.png">
+		<img class="button" id="VFib" src="assets/vfib.png" style = "left:130px; top:200px; display:none">
+		<div class="button" id="FlatLine"></div>
+		<img class="button " id="RateLeft" src="assets/RateLeft.png" onclick="rateLeft()">
+		<img class="button " id="RateRight" src="assets/RateRight.png" onclick="rateRight()">
+		<img class="button " id="CurrentLeft" src="assets/CurrentLeft.png" onclick="currentLeft()">
+		<img class="button " id="CurrentRight" src="assets/CurrentRight.png" onclick="currentRight()">
+		<img class="button" id="AdultDummy" src="assets/AdultDummy.png" onclick="">
+		<div style="position:absolute" id="LeftPad" onclick=""></div>
+		<div style="position:absolute" id="RightPad"  onclick=""></div>
+		<img class="button " id="LeadButton" src="assets/Lead.png" onclick="leadSelect()">
+		<div class="button" id="LeftTarget"></div>
+		<img class="button" id="RightTarget" src="assets/RightPadTarget.png">
+		<div class="button" id="CPRButton" onclick="CPRButton()">Start CPR</div>
+		<div class="button" id="Assess">Assess Patient</div>
+		<div class="button" id="CaseDescription">Case Description</div>
+		<img class="button " id="SpeedDial" src="assets/SpeedDial.png" onclick="speedDial()">
+		<img style="position:absolute; margin:-8px" id="ChargingBackground" src="assets/ChargingBackground.png">
+		<img class="button " id="Sync" src="assets/Sync.png" onclick="sync()" style="left:650px; top:305px; cursor: pointer; cursor: hand;">
+		<img class="button" id="SyncLight" src="assets/Light.png" style="left:660px; top:315px; display:none">
+		<div class="button" id="ChangeRhythm"></div>
+		<div class="button" id="CurrentRhythm"></div>
+		<img class="button " id="PauseButton" src="assets/PauseButton.png" onclick="pause()">
+		<!-- <img class="button" id="CurrentRhythmImg" src="assets/vtac.png"> -->
+		<img class="button" id="e" src="assets/e.png">
+		<div class="button" id="TherapyCable" ></div>
+		<!-- <div class="button" id="Help">Help</div> -->
+		<div style="position:absolute" id="GrayCable"></div>
+		<div style="position:absolute" id="WhiteCable"><div class="GraySnap" id="WhiteTarget"></div> </div>
+		<div class=" GraySnap " style="position:absolute" id="TestPlug"><div class="GraySnap" id="WhiteTarget2"></div></div>
+		<div class="button" id="TherapyCableTarget"></div>
+		<div class="button" id="LLEKG"></div>
+		<div class="button" id="RAEKG"></div>
+		<div class="button" id="LAEKG"></div>
+		<div class="button" id="EKGConnector"></div>
+		<div class="button" id="FloatingEKG"></div>
+		<img class="button" id="RemoveTestPlug" src="assets/RemoveTestPlug1.png"/>
+		<img class="button" id="ConnectElectrodes" src="assets/ConnectElectrodes1.png"/>
+		<div class="button" id="LLEKGTarget"></div>
+		<div class="button" id="RAEKGTarget"></div>
+		<div class="button" id="LAEKGTarget"></div>
+		<!-- <img class="button" src="assets/LeftPadTarget.png" id="LeftPadTarget"/>
+		<img class="button" src="assets/RightPadTarg.png" id="RightPadTarg"/> -->
+		<div class="button" id="PatientWeight"></div>
+		<div class="button" id="BottomPaceBar"><p style="position:absolute;" class=" MenuText TopText" id="BottomRate">100 PPM</p>
+			<p style="position:absolute;" class="MenuText TopText" id="BottomAmps">30 mA</p>
+			<p style="position:absolute;" class="MenuText TopText" id="BottomDemand">Demand</p>
+			<p style="position:absolute;" class="MenuText TopText" id="BottomPaused">Paused</p></div>
+		<div class="button" id="EKGBox"></div>
+		<div class="button" id="EKGBoxText">Lifepak's ECG Leads</div>
+		<div style="position:absolute" id="BottomBar"><div style="position:absolute" class="MenuText TopText" id="BBText"></div></div>
+		<div class="button" id="RhythmChange"></div>
+		<div class="button" id="RhythmChange2"></div>
+
+		<div id="LeadSelect" class="button">
+			<ul>
+				<li id="Paddles">Paddles</li>
+				<li>I</li>
+				<li>II</li>
+				<li>III</li>
+			</ul>
+		</div>
+
+		<div id="CPRStatus" class="button ">CPR IS BEING ADMINISTERED</div>
+
+
+		<div id="Charging" class="button ">
+			<p class="MenuText" id="ChargingTo">Charging to </p>
+			<img  id="ShockLoadingBar" style="position:absolute; margin:0" src="assets/ShockLoading.png">
+			<p class="MenuText" id="Disarm">Push Speed Dial to Disarm</p>
+
+		</div>
+		<div id="ShockMenu" class="button">
+			<p class="MenuText" id="JAvaliable">Available</p> 	
+			<p class="MenuText Inline" id="Push">Push</p><img id="ShockButtonScreen" src="assets/Shock.png"> <p id="LastWord" class="MenuText Inline">Button!</p>
+			<p class="MenuText" id="Disarm">Push Speed Dial to Disarm</p>
+		</div>
+		<div id="EnergyDelivered" class="button"><p class="MenuText">Energy Delivered</p></div>
+		<div id="ShockAdvised" class="button">Shock Advised</div>
+		<div id="AnalyzeMenu" class="button">
+			
+			<p class="MenuText" id="AnalyzeText">Analyzing Now -- Stand Clear</p>
+
+		</div>
+		<div id="PacerMenu" class="button ">
+			<p class=" MenuText TopText" id="TopRate" style="position:absolute">100 PPM</p>
+			<p class=" MenuText TopText" id="TopAmps" style="position:absolute">30 mA</p>
+			<p class=" MenuText TopText" id="TopDemand" style="position:absolute">Demand</p>
+			<p class="MenuText" id="PacerText">Rate</p>
+			<p class="MenuText" id="PacerText2">100 PPM</p>
+			<p class="MenuText" id="PacerText3">30 mA</p>
+		</div>
+		<div id="TopMonitor" class="button">
+			<div class="MonitorText" class="button" id="HR">HR</div>
+			<div class="MonitorText" class="button" id="HRNum">0</div>
+			<div id="CurrentJShock" style="position:absolute">2J</div>
+			<div id="Time" style="position:absolute"></div>
+			<img id="Battery" src="assets/Battery.png" style="left:473px; top:130px; position:absolute">
+			
+			<img class="button" id="Ticker" style="margin:0" src="assets/Ticker.png">
+			<img class="button" id="PaddlesX1" src="assets/PaddlesX1.png">
+			<img style="position:absolute" id="Heart" src="assets/Heart.png">
+		</div>
+
+		
+			<!-- <ul id="CaseSelection">
+				<li onclick="caseSelection(1)"> Case I</li>
+				<li onclick="caseSelection(2)">Case II</li>
+				<li onclick="caseSelection(3)">Case III</li>
+			</ul>
+		 -->
+
+
+
+		<!-- <div id="Score">
+			<p>Score: 0</p>
+			<p>Time:</p><p>1:00</p>
+		</div> -->
+		<div id="StartInfo" title=""></div>
+		<div id="PatientStatus" title="">
+ 			 <p id="PatientInfo">The infant is breathing. She is somewhat pale. You feel a faint central pulse.</p>
+		</div>
+		<div id="EndDialog" title="Congratulations!"></div>
+		<div id="HelpDialog" title="Help"></div>
+		<div id="HelpDialog2" title="Help"></div>
+		<div id="HelpDialog3" title="Help"></div>
+		<div id="ErrorDialog" title="Error"></div>
+		<div id="TutorialDialog" title="Tutorial"></div>
+		<div id="IntroModal" title="Welcome!">The modules contained in this simulator focus exclusively on how to use the defibrillator. You will not be required to administer medications during case management.<br><br>In the Introductory Module, use your mouse or touchpad to hover the cursor over the defibrillator's buttons, cables, pads, and ECG leads. Start with the defibrillator's ON button and proceed in your usual order. Remember to hover over the pads, cables, and leads. <br><br>Click the "X" in the top right of this box to get started</div>
+		<img id="PrintButton" class="button" src="assets/RightPadTarget.png">
+		<img id="CodeSummary" class="button" src="assets/RightPadTarget.png">
+		<img id="EventButton" class="button" src="assets/RightPadTarget.png">
+		<img id="SizeButton" class="button" src="assets/RightPadTarget.png">
+		<img id="Alarms" class="button" src="assets/RightPadTarget.png">
+		<img id="Options" class="button" src="assets/RightPadTarget.png">
+		<img id="HomeScreen" class="button" src="assets/RightPadTarget.png">
+		
+		<img class="button" id="EKGPort" src="assets/RightPadTarget.png"></div>
+		<img class="button" id="TherapyPort" src="assets/RightPadTarget.png"></div>
+
+		<div class="button" id="Continue"><a id="lnkContinueTut" href="Tutorial.html?testnum=1">Continue to Tutorial Cases</a></div>
+		<div class="button" id="HelpBox"><div id="HelpTitle"><p>What next?</p><div id="Close" onclick="closez()">close</div></div><div id="HelpInfo">The modules contained in this simulator focus exclusively on how to use the defibrillator. You will not be required to administer medications during case management.<br><br>On this page, use your mouse or touchpad to hover the cursor over the defibrillator's buttons, cables, pads, and ECG leads. Start with the defibrillator's ON button and proceed in your usual order. Remember to hover over the pads, cables, and leads.<br><br>After you are finished with this module, click "Continue to Tutorial Cases" to move on.</div></div>
+		<form action="demo_form.asp" method="post">
+		<input id="hidden_field" name="hidden_field" type="hidden" value="123" />
+		</form>
+
+        <script type="text/javascript">
+            var parseQueryString = function () {
+
+                var str = window.location.search;
+                var objURL = {};
+
+                str.replace(
+                    new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+                    function ($0, $1, $2, $3) {
+                        objURL[$1] = $3;
+                    }
+                );
+                return objURL;
+            };
+            var params = parseQueryString();
+
+            var cont = document.getElementById('lnkContinueTut');
+            var back = document.getElementById('lnkBack');
+            cont.setAttribute("href", 'Tutorial.html?testnum=1&user=' + params['user']);
+            back.setAttribute("href", 'Index.html?user=' + params['user']);
+        </script>
+
+
+
+		
+
+	</body>
+</html>

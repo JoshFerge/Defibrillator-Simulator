@@ -1,0 +1,14 @@
+body {
+	
+	/*font-family:"Helvetica","sans-serif";*/
+	background-color:#8794AD;
+	font-size:18px;
+	background-size: 100%;
+
+
+}
+
+#introA {color:black; background-color:lightblue; padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px; text-align: center; display: block; height:50px;}
+
+#Main{width: 1000px;}
+#introA div {margin-top:7px;}

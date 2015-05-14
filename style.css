@@ -1,0 +1,305 @@
+#lifepak {z-index: 0;}
+
+
+#back {position:absolute; top:5px; left:3px; border-bottom-right-radius: 10px; border-top-right-radius: 10px; padding-right:10px; padding-top:10px; padding-bottom:10px; background-color:#F2AC00;}
+
+
+#MainScreen{background-color:black; position:absolute; width:362px; height:273px; left:130px; top: 127px;}
+body {font-family:arial; sans-serif; margin:0px;}
+.button {
+	margin:-8px;
+}
+html, body {
+	position: relative;
+}
+
+
+
+.button {position:absolute;}
+#EnergyLevel{background:url("assets/EnergyBackground.png"); width:362px; height:145px; left:130px; top:255px; position: absolute; display: none;}
+.MenuText{color:black;  font-family:Arial; font-weight:bold;}
+#SelectEnergy{margin-top:40px; text-align: center;}
+#JoulesEnergy{text-align: center}
+#Charging {
+	background:url("assets/EnergyBackground.png");
+	width:362px; 
+	height:145px; 
+	left:130px; 
+	top:255px; 
+	position: absolute;
+	display:none;
+}
+#ChargingTo {
+	text-align: center;
+	margin-top:50px;
+}
+#ChargeToJoules {display: inline}
+.MenuText{color:black;  font-family:Arial; font-weight:bold;}
+#Disarm {position:absolute; top:83px; left:76px;}
+
+#ShockMenu {
+	background:url("assets/EnergyBackground.png");
+	width:362px; 
+	height:145px; 
+	left:130px; 
+	top:255px; 
+	position: absolute;
+	display:none;
+
+}
+#Shockmenu p {margin-left:auto;margin-right:auto;}
+#EnergyDelivered {
+	background:url("assets/EnergyBackground.png");
+	width:362px; 
+	height:145px; 
+	left:130px; 
+	top:255px; 
+	position: absolute;
+	display:none;
+}
+
+#EnergyDelivered p {
+	text-align: center;
+	font-weight:bold;
+	margin-top:60px;
+}
+
+#ShockAdvised {
+	display: none;
+	font-weight:bold;
+	left:253px;
+	top:288px; 
+	position:absolute;
+	color:black;
+	z-index: 100
+}
+
+.Inline {display: inline;}
+#ShockLight {display:none;}
+#AnalyzeLight1 {display:none;}
+#AnalyzeLight2 {display:none;}
+#AnalyzeText {text-align: center; margin-top:57px;}
+#AnalyzeMenu {
+	background:url("assets/EnergyBackground.png");
+	width:362px; 
+	height:136px; 
+	left:130px; 
+	top:255px; 
+	position: absolute;
+	display: none;
+}
+.MonitorText {position:absolute; font-family:sans-serif; color:#6EFACB; font-weight: bold}
+#HR {left:138px; top:125px;}
+#HRNum {left:163px; top:125px; width:30px; font-size:30px;}
+#CurrentJShock {position:absolute; left:290px; top:130px; color:yellow; font-family:sans-serif;}
+#Time {position:absolute; left:270px; top:150px; color:white; font-family:sans-serif;}
+#TopMonitor {display:none;}
+#Push {position:absolute; top:50px; left:109px;}
+#JAvaliable {text-align: center; margin-top:30px;}
+#ShockButtonScreen{position:absolute; left:154px; top:50px; height:35px; }
+#LastWord {position:absolute; top:50px; left:194px;}
+#ShockLoadingBar {
+	top:70px; 
+	left:89px;
+	height:14px;
+	width:10px;
+	z-index: 11
+
+}
+#ECGVFib {top:190px; left:130px;}
+#Ticker {top:180px; left:130px;z-index: 101 ; width:10px;}
+
+#Pacer {left:648px; top:350px; cursor: pointer; cursor: hand;}
+#PacerLight {left:658px; top:361px; display: none;}
+
+#PacerMenu {
+	background:url("assets/EnergyBackground.png");
+	width:362px; 
+	height:136px;
+	left:130px; 
+	top:259px; 
+	position: absolute;
+	display: none;
+
+
+}
+
+#PacerText {text-align: center; margin-top:41px; font-size:20px; margin-bottom: 5px}
+#PacerText2 {text-align: center; margin-top:0px; font-size:30px; margin-bottom:0px;}
+#PacerText3 {display:none; text-align: center; margin-top:0px; font-size:30px; position: absolute; top:70px; left:135px;}
+
+#CurrentLeft {left:649px; top:421px; cursor: pointer; cursor: hand;}
+#CurrentRight {left:693px; top:421px; cursor: pointer; cursor: hand;}
+#RateLeft {left:648px; top:385px; cursor: pointer; cursor: hand;}
+#RateRight {left:691px; top:385px; cursor: pointer; cursor: hand;}
+
+
+#Score {position: absolute; right:100px; top:0; font-family: sans-serif;}
+
+
+#AdultDummy {left:820px; top:180px; width:250px; pointer-events:none;}
+
+#RightTarget {left:936px; top:385px; width:45px; }
+#LeftTarget {left:867px;top:323px; height:40px; width:45px; z-index: -1 }
+
+.dial {position: absolute;}
+
+#LeadButton {left:546px; top:306px; cursor: pointer; cursor: hand;}
+#LeadSelect {
+
+	display: none;
+	z-index: 1000;
+	left:133px;
+	top:179px;
+	list-style: none;
+	width:70px;
+	height:72px;
+	background-color:gray;
+	font-family: arial;
+
+}
+#LeadSelect ul {padding:0; margin:0; z-index: 200;}
+#LeadSelect li {
+	list-style: none;
+	text-align: center;
+}
+#LeftPad {left:950px; top:500px; width:42px; height:42px; background:url("assets/LeftPad.png"); background-size: 42px 42px; z-index: 1; cursor: pointer; cursor: hand;}
+#RightPad {left:1000px; top:500px; width:42px;height:42px; z-index: 4; background:url("assets/RightPad.png"); background-size: 42px 42px; z-index: 30 !important; cursor: pointer; cursor: hand;}
+#CPRButton {left:1080px; top:300px; width:80px; border-radius:3px; padding-top:10px; padding-bottom: 10px; padding-left: 5px; padding-right:5px; background-color:green; color: white; text-align: center; border-radius:3px; padding-top:10px; border:2px solid red;}
+#CPRButton:hover {cursor: pointer; cursor: hand;}
+#Assess {left:1080px; top:225px; width:80px; margin-bottom:10px; padding-top:10px; padding-bottom: 10px; padding-left: 5px; padding-right:5px; background-color:#2B28FF; color: white; text-align: center;}
+#Assess:hover {cursor: pointer; cursor: hand;}
+#CaseDescription {left:1080px; top:145px; width:80px; margin-bottom:10px; padding-top:10px; padding-bottom: 10px; padding-left: 5px; padding-right:5px; background-color:#2B28FF; color: white; text-align: center;}
+#CaseDescription:hover {cursor: pointer; cursor: hand;}
+
+#CPRStatus {color:red; font-weight: bold; position:absolute; left:820px; top:150px; display:none;}
+.ui-dialog {width:500px;}
+
+#SpeedDial {left:370px; top:545px; cursor: pointer; cursor: hand;}
+
+
+#ChargingBackground {top:325px; left:218px; z-index: 10; width:190px; height:14px; display: none;}
+
+#PaddlesX1 {left:140px; top:160px;}
+#Heart {left:137px; top:135px;}
+
+
+.TopText {color:yellow;}
+#TopRate {left:146px; top:-9px;}
+#TopAmps {left:300px; top:-9px;}
+#TopDemand {top:-9px; left:2px;}
+#Help {font-size:20px; bottom:50px; right:50px; background-color:red; padding-left:10px; padding-right:10px; padding-top:5px; padding-bottom:5px; border-radius:2px;}
+#e {left:460px; top:81px; width:12px;}
+#FlatLine {left:130px; top:190px;height:55px; width:0px; background:url("assets/Flatline.png");}
+#ChangeRhythm {left:130px; top:180px; width:0px; height:55px; z-index: 10; background:black url("assets/Flatline.png");}
+#CurrentRhythm {left:130px; top:180px; width:355px; height:55px; z-index:0;}
+#PauseButton {left:659px; top:455px; cursor: pointer; cursor: hand;}
+#CaseSelection {position:absolute; left:800px}
+#CaseSelection li {list-style: none;}
+
+#GrayCable {width:60px; height:40px; background:url("GrayCable.png"); background-size:60px 40px; left:959px; top:608px;z-index: 1 !important; cursor: pointer; cursor: hand; }
+#WhiteCable {width:60px; height:40px; background:url("WhiteCable.png"); background-size:60px 40px; left:850px; top:550px;z-index: 0; cursor: pointer; cursor: hand;}
+#TestPlug {width:50px; height:30px; background:url("assets/TestPlug.png"); background-size:50px 30px; left:994px; top:613px; cursor: pointer; cursor: hand;}
+#WhiteTarget {width:20px; height:40px; position:absolute; left:30px;}
+#WhiteTarget2 {width:20px; height:40px; position:absolute; left:25px;}
+#TherapyCable {left:548px; top: 558px; width:250px; height:100px; background:url("assets/TherapyCable.png"); background-size:250px 100px; z-index: 2 !important;}
+#LeftTarget {left:867px;top:323px; height:40px; width:45px; z-index: -1 }
+#TherapyCableTarget {left:503px;top:562px; height:40px; width:45px; z-index: -1 }
+#EKGConnector {width: 250px; height:100px; left:-62px; top:573px; background:url("assets/EKGConnector.png"); background-size: 250px 100px;  z-index: 2 !important;}
+
+#EKGBox {left:850px; top:50px; height:50px; width: 150px; border:5px solid blue; border-radius:1px;}
+#EKGBoxText {left:850px; top:30px; width:150px;}
+#RAEKG {width:25px; height:25px; background:url('assets/RAEKG.png'); background-size:25px 25px; left:880px; top:70px;  z-index: 1}
+#LLEKG {width:25px; height:25px; background:url('assets/LLEKG.png'); background-size:25px 25px; left:913px; top:70px; z-index: 1}
+#LAEKG {width:25px; height:25px; background:url('assets/LAEKG.png'); background-size:25px 25px; left:946px; top:70px;  z-index: 1}
+#RAEKG {cursor: pointer; cursor: hand;}
+#LLEKG {cursor: pointer; cursor: hand;}
+#LAEKG {cursor: pointer; cursor: hand;}
+
+#LLEKGTarget {width:8px; height:8px; left:936px; top:446px;background-color: red; z-index: 0; display: none}
+#LAEKGTarget {width:8px; height:8px; left:940px; top:338px; background-color: black;  z-index: 0; display: none}
+#RAEKGTarget {width:8px; height:8px; left:855px; top:362px; background-color:gray;  z-index: 0; display: none; }
+
+
+#FloatingEKG {width:10px; height:10px; right:10px; top: 500px;}
+
+
+#PatientWeight {left:880px; top:120px; border:2px; font-weight:bold; }
+
+#BottomPaceBar {width:360px; height:20px; left:130px; top:380px; background-color:#242449; display:none;}
+
+#BottomBar {width:360px; height:20px; left:122px; top:372px; background-color:#242449; display:none; z-index: 4000}
+#BBText {text-align: center;  }
+
+
+
+.tutorial:hover {outline:2px solid yellow; cursor: pointer; cursor: hand;}
+
+#TutorialDialog {}
+
+#BottomRate {left:146px; top:-15px;}
+#BottomAmps {left:300px; top:-15px;}
+#BottomDemand {top:-15px; left:2px;}
+#BottomPaused {top:-15px; left:220px; display: none;}
+
+#LeftTarget{left:833px; top:377px; height:120px; z-index:0; display: block !important}
+#RightPadTarg {left:980px; top:365px; height:50px;}
+div#EKGConnector.tutorial {top:690px;}
+div#TherapyCable.tutorial {top:690px; z-index: 1000}
+
+#RemoveTestPlug {left:130px; top:260px; display:none; border-top:20px solid #242449; border-bottom: 20px solid #242449;}
+#ConnectElectrodes {left:130px; top:260px; display:none; width:360px; border-top:20px solid #242449; border-bottom: 20px solid #242449; z-index: 1000}
+#EKGPort {top:580px; left:107px; width:50px; height:50px;z-index: 1 !important}
+#TherapyPort {top:565px; left:553px; width:70px; height:70px; z-index: 1 !important}
+
+#RhythmChange {left:130px; top:180px; width:0px; height:55px; z-index: 50;}
+#RhythmChange2 {left:130px; top:180px; width:0px; height:55px; z-index: 51;}
+#ShowMeHow {left:1250px; top:450px; background-color: blue}
+
+#PrintButton {left:60px; top:433px; width:84px; height:32px;}
+#CodeSummary {left:151px; top:433px; width:84px; height:32px;}
+#EventButton {left:358px; top:433px; width:84px; height:32px;}
+#SizeButton {left:596px; top:306px; width:34px; height:32px;}
+#Alarms {left:547px; top:420px; width:84px; height:32px;}
+#Options {left:547px; top:455px; width:84px; height:32px;}
+#HomeScreen {left:313px; top:461px; width:30px; height:32px;}
+
+.errorDialog .ui-widget-header {background:red !important;}
+.helpDialog .ui-widget-header {background:#35E869;}
+.statusDialog .ui-widget-header {background:blue ;}
+
+#KnobContainer {left:351px; top:525px;}
+
+#Continue {left:610px;  background-color:#F2AC00; border-radius:20px; padding-left:10px; padding-right:10px; padding-top:10px; padding-bottom:10px;}
+
+#HelpTitle {margin-bottom:10px; background-color:#35E869; text-align: center; height:35px; 	}
+#HelpTitle p {margin-top:0px; padding-top:8px; color:#fff; font-weight:bold;}
+
+#HelpBox {left:1100px; top:380px; width:270px; height: 340px; outline:2px solid #eee; background-color:#ddd;font-family:"Trebuchet MS"; font-size:15px; }
+
+#Close {position:absolute; left:225px; top:10px;z-index: 1000; display:none; cursor: pointer; cursor: hand;}
+
+  ::-moz-selection{
+    background-color:Transparent;
+    color:#000;
+    }
+
+    ::selection {
+    background-color:Transparent;
+    color:#000;
+    }
+.button::-moz-selection,
+.button::selection { ... }
+
+#time_ticker {left:1100px; top:40px; position: absolute;}
+#score {left:1100px; top:65px; position: absolute;}
+
+#time_ticker_label {left:1050px; top:40px; position: absolute;}
+#score_label {left:1050px; top:65px; position: absolute;}
+
+
+
+
+
+
+
