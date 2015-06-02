@@ -492,7 +492,7 @@ $(function() {
 
     rhythmChange(initp, "black url('assets/DeadLine.png')");
 
-  }, 40000); //600000  20000
+  }, 600000); //600000  20000
   document.getElementById("TestPlug").style.left = "994px";
   document.getElementById("TestPlug").style.top = "613px";
   document.getElementById("GrayCable").style.left = "959px";
