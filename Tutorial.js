@@ -492,7 +492,7 @@ $(function() {
 
     rhythmChange(initp, "black url('assets/DeadLine.png')");
 
-  }, 600000); //600000  20000
+  }, 40000); //600000  20000
   document.getElementById("TestPlug").style.left = "994px";
   document.getElementById("TestPlug").style.top = "613px";
   document.getElementById("GrayCable").style.left = "959px";
@@ -867,7 +867,6 @@ $(function() {
 
 
         CPRDeathTime = setTimeout(function() {
-
           TestCase2.SurvivalStateReached = false;
           TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
           TestCase2.DeathStateReached = true;
@@ -896,9 +895,6 @@ $(function() {
 
       } else if (patientState == "Sync" && isTestOn && isSyncOn && chargeJoules < 85 && chargeJoules > 4 && isShockReady) {
         document.shockTimeout = setTimeout(function() {
-
-
-
           TestCase2.TotalPoints += 20;
           rhythmChange(initp, "black url('assets/NormalRate.png')");
           clearTimeout(MinDeathTimeout);
@@ -2976,11 +2972,7 @@ function shock() {
     }
 
     if (patientState == "VFib" && isTestOn && chargeJoules > 84 && GetUrlValue('testnum') == 5) {
-
-
       TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
-
-
       if (TestCase2.TotalCaseTime > 60 * 4) {
         TestCase2.CaseTimeMoreThanFourMin = true;
       }
@@ -2992,6 +2984,9 @@ function shock() {
       TestCase2.DeathStateReached = true;
       TestCase2.ShockWithEnergyGreaterThan84 = true;
       clearTimeout(casePointsTimeDeduction);
+      clearTimeout(MinDeathTimeout);
+      clearTimeout(CPRDeathTime);
+
       patientState = "Dead";
       HRNum = 0;
       sendPostData(TestCase2);
