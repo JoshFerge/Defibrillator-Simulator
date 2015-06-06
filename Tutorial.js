@@ -3756,7 +3756,7 @@ function ecgController() {
     if (GetUrlValue('testnum') == 5 && TestCase2.TimeToPadsAttached < 0) {
       TestCase2.TimeToPadsAttached = Math.round((new Date() / 1000) - startTime);
     }
-    if (GetUrlValue('testnum') == 6 && TestCase3x.TimeToPadsAttached < 0) {
+    if (GetUrlValue('testnum') == 6 && TestCase3.TimeToPadsAttached < 0) {
       TestCase3.TimeToPadsAttached = Math.round((new Date() / 1000) - startTime);
     }
   }
