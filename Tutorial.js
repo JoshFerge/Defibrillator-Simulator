@@ -567,6 +567,7 @@ $(function() {
 
     });
     var tutStatement;
+    var tutStatement2;
     var tutTitle;
 
     $(".tutorial").hover(function() {
@@ -735,6 +736,7 @@ $(function() {
           position: ['left', 500],
           title: tutTitle
         });
+        tutStatement2 = undefined;
       }
       $("a.youtube").YouTubePopup();
 
