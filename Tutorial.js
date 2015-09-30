@@ -232,7 +232,7 @@ function GetUrlValue(VarSearch) {
 
 
 function sendPostData(data) {
-  alert('NOTE: This is for debugging purposes.\nIf you see this message then sendPostData was called\nand we will try to log the results now.');
+  // alert('NOTE: This is for debugging purposes.\nIf you see this message then sendPostData was called\nand we will try to log the results now.');
 
   var sessId = params["sess"];
   if (sessId && sessId > 1) {
@@ -259,7 +259,7 @@ function sendPostData(data) {
         postCaseResult(data);
       },
       error: function(request, status, error) {
-        alert("Could not create session for results: " + request.responseText);
+        // alert("Could not create session for results: " + request.responseText);
         //alert(request.status);
         //alert(request.statusText);
       }
@@ -267,7 +267,7 @@ function sendPostData(data) {
   } else {
     postCaseResult(data);
   }
-  alert('NOTE: This is for debugging purposes.\nAttempt to log results completed.');
+  // alert('NOTE: This is for debugging purposes.\nAttempt to log results completed.');
 }
 
 function postCaseResult(data) {
@@ -295,7 +295,7 @@ function postCaseResult(data) {
         //alert('NOTE: This is for debugging purposes.\nIf you see this message then the results should have been logged.');
       },
       error: function(request, status, error) {
-        alert("Could not log result" + request.responseText);
+        // alert("Could not log result" + request.responseText);
         //alert(request.status);
         //alert(request.statusText);
       }
