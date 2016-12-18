@@ -1856,11 +1856,8 @@ function caseSelection(caseNum) {
     $('#PatientInfo').html("The baby is awake and fussy, with grunting respirations. There are palpable pulses. BP is 55/21.");
     helpController(200);
     document.getElementById('PatientWeight').innerHTML = "Weight: 8.5kg";
-
-
   }
 }
-
 
 function updateTime() {
   var d = new Date();
@@ -1876,21 +1873,14 @@ function heartBeatTick() {
   }, 100);
 }
 
-
 function moveTicker() {
-
-
-
-
   document.getElementById("Ticker").style.display = "block";
   if (initp < 482) {
     if (isTransOver) {
       if (initp == changeInit + 8)
         document.getElementById("RhythmChange").style.zIndex = "0";
       readyForDeletion = true;
-
     }
-
     if (isRhythmTransitionOn) {
       document.getElementById("RhythmChange").style.width = parseInt(document.getElementById("RhythmChange").style.width) + 4 + "px";
       if (changeInit + parseInt(document.getElementById("RhythmChange").style.width) > 481) {
@@ -1899,8 +1889,6 @@ function moveTicker() {
         document.ccapsule = transitonRhythm;
       }
     }
-
-
     document.getElementById("ChangeRhythm").style.width = initp - 119 + "px";
     initp += 4;
 
@@ -1914,77 +1902,54 @@ function moveTicker() {
       readyForDeletion = false;
       isRhythmTransitionOn = false;
     }
-
-
     initp = 130;
     document.getElementById("ChangeRhythm").style.width = 0 + "px";
     var gs = document.bcapsule;
     document.bcapsule = document.ccapsule;
     document.ccapsule = gs;
-
-
     $('#ChangeRhythm').css('background', document.bcapsule);
     $('#CurrentRhythm').css('background', document.ccapsule);
-
   }
 }
 
-
-
 function rhythmChange(rhythmnum, r) {
-
   if (document.bcapsule == r && document.ccapsule == r) {
     return;
   } else {
     isRhythmTransitionOn = true;
     changeInit = rhythmnum;
-
     document.getElementById('RhythmChange').style.left = changeInit + "px";
     document.getElementById('RhythmChange').style.width = "1px";
     document.getElementById('RhythmChange').style.zIndex = "50";
     $('#RhythmChange').css('background', r);
     transitonRhythm = r;
-
   }
-
 }
-
-
-
 
 function turnOn() {
   if (!isTutorialOn) {
     dataLogString += "On ";
     if (on === false && isOnLoading === false) {
-
       if (GetUrlValue('testnum') == 4) {
         TestCase1.TimeToTurnDefibOn = Math.round((new Date() / 1000) - startTime);
       }
-
       if (GetUrlValue('testnum') == 5) {
         TestCase2.TimeToTurnDefibOn = Math.round((new Date() / 1000) - startTime);
       }
       if (GetUrlValue('testnum') == 6) {
         TestCase3.TimeToTurnDefibOn = Math.round((new Date() / 1000) - startTime);
       }
-
-
-
       isOnLoading = true;
       document.getElementById('player').play();
-
 
       if (isTestPlugAttached == true) {
         helpController(3);
       }
 
-
       if (patientState == "VFib") {
         if (isTestPlugAttached == true) {
           helpController(3);
         }
-
-
       }
       if (patientState == "VTac") {
         helpController(202);
@@ -1992,7 +1957,6 @@ function turnOn() {
       if (patientState == "SlowRhythm") {
         helpController(102);
       }
-
 
       document.getElementById('OnOff').src = "assets/LifePakOnOn.png";
       document.turnStartScreenOff = setTimeout(function() {
@@ -2009,22 +1973,14 @@ function turnOn() {
           document.getElementById("RemoveTestPlug").style.display = "block";
           document.getElementById("removetestplug").play();
           helpController(103);
-
-
         }
         if ((isElectrodesConnected === false || isLeftPadConnected === false || isRightPadConnected === false) && !isTestPlugAttached) {
           document.getElementById("ConnectElectrodes").style.display = "block";
           document.getElementById("connectelectrodes").play();
           document.getElementById("BottomBar").style.display = "block";
           document.getElementById('BBText').innerHTML = ("Paddles leads off");
-
-
-
         }
-
-
         ecgController();
-
       }, 2000);
       document.getElementById('MainScreen').style.background = "url('assets/StartupScreen.png')";
     } else {
@@ -2039,13 +1995,10 @@ turnEnergyOff = setTimeout(function() {
 }, 5000);
 
 function energySelectUp() {
-
   dataLogString += "EnergySelectRighttUp "
   if (ispacerFuncOn) {
     TestCase3.EnergySelectWhilePacing = true;
-
   }
-
   if (isAEDOn) {
     isAEDOn = false;
     if (isShockReady) {
@@ -2060,8 +2013,6 @@ function energySelectUp() {
       isShockReady = false;
       document.getElementById('shockprompt').pause();
       document.getElementById('shockprompt').src = document.getElementById('shockprompt').src;
-
-
       clearInterval(document.interval);
       document.getElementById("ShockLight").style.display = "none";
       clearTimeout(document.LoadingInterval);
@@ -2069,9 +2020,6 @@ function energySelectUp() {
       document.getElementById('EnergyLevel').style.display = "none";
       document.getElementById('AnalyzeLight2').style.display = "none";
       document.getElementById('AnalyzeLight1').style.display = "none";
-
-
-
     } else {
       document.getElementById('ChargingBackground').style.display = "none";
       document.getElementById('ShockAdvised').style.display = "none";
@@ -2086,7 +2034,6 @@ function energySelectUp() {
       return;
     }
   }
-
   if (on && (!isCharging) && (!isShockReady) && (isLeftPadConnected && isRightPadConnected && isElectrodesConnected && isTherapyCableAttached)) {
     document.getElementById('tick').play();
     if (isEnergySelectionOn === false) {
@@ -2103,8 +2050,6 @@ function energySelectUp() {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) + 1;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
-
         } else if (chargeJoules < 20 && chargeJoules >= 10) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) + 5;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
@@ -2134,9 +2079,6 @@ function energySelectUp() {
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
         }
-
-
-
         if (chargeJoules >= 200) {
           if (patientState == "VFib") {
             helpController(5);
@@ -2148,12 +2090,9 @@ function energySelectUp() {
             helpController(207);
           }
         }
-
         document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
         document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
       }
-
       clearTimeout(turnEnergyOff);
       document.getElementById('EnergyLevel').style.display = "block";
       turnEnergyOff = setTimeout(function() {
@@ -2164,21 +2103,16 @@ function energySelectUp() {
     }
 
   } else if (isTestPlugAttached && on && isTherapyCableAttached) {
-
     document.getElementById('tick').play();
     if (isEnergySelectionOn == false) {
       isEnergySelectionOn = true;
       clearTimeout(turnEnergyOff);
-
-
     } else {
       if (chargeJoules < 360) {
         if (chargeJoules < 10) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) + 1;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
-
         } else if (chargeJoules < 20 && chargeJoules >= 10) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) + 5;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
@@ -2208,9 +2142,6 @@ function energySelectUp() {
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
         }
-
-
-
         if (chargeJoules >= 200) {
           if (patientState == "VFib") {
             helpController(5);
@@ -2221,21 +2152,15 @@ function energySelectUp() {
             helpController(207);
           }
         }
-
         document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
         document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
       }
-
-
-
     }
     document.getElementById('EnergyLevel').style.display = "block";
     document.getElementById('RemoveTestPlug').style.display = "none";
     if (isTestPlugAttached) {
       document.getElementById('BBText').innerHTML = "Remove Test Plug";
     }
-
     document.getElementById('BottomBar').style.display = "block";
     turnEnergyOff = setTimeout(function() {
       document.getElementById('EnergyLevel').style.display = "none";
@@ -2243,22 +2168,13 @@ function energySelectUp() {
       document.getElementById('RemoveTestPlug').style.display = "block";
       document.getElementById('BottomBar').style.display = "none"
     }, 5000);
-
-
   }
-
-
-
-
 }
 
 function energySelectDown() {
-
   if (ispacerFuncOn) {
     TestCase3.EnergySelectWhilePacing = true;
-
   }
-
   dataLogString += "EnergySelectDown "
   if (isAEDOn) {
     isAEDOn = false;
@@ -2280,8 +2196,6 @@ function energySelectDown() {
       document.getElementById('AnalyzeLight2').style.display = "none";
       document.getElementById('AnalyzeLight1').style.display = "none";
       return;
-
-
     } else {
       document.getElementById('AnalyzeMenu').style.display = "none";
       document.getElementById('AnalyzeText').innerHTML = "Analyzing Now -- Stand Clear";
@@ -2316,8 +2230,6 @@ function energySelectDown() {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 1;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
-
         } else if (chargeJoules < 21 && chargeJoules > 11) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 5;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
@@ -2347,15 +2259,12 @@ function energySelectDown() {
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
         }
-
         if (chargeJoules <= 20) {
           if (patientState == "VTac") {
             helpController(207);
           }
         }
-
       }
-
       clearTimeout(turnEnergyOff)
       document.getElementById('EnergyLevel').style.display = "block";
       turnEnergyOff = setTimeout(function() {
@@ -2368,37 +2277,28 @@ function energySelectDown() {
     document.getElementById('tick').play();
     if (isEnergySelectionOn == false) {
       isEnergySelectionOn = true;
-
-
-
     } else {
       if (chargeJoules < 360) {
         if (chargeJoules < 11 && chargeJoules > 2) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 1;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
-
         } else if (chargeJoules < 21 && chargeJoules > 11) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 5;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
         } else if (chargeJoules < 31 && chargeJoules > 20) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 10;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
         } else if (chargeJoules < 71 && chargeJoules > 30) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 20;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
         } else if (chargeJoules < 101 && chargeJoules > 70) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 30;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
         } else if (chargeJoules > 101 && chargeJoules <= 325) {
           chargeJoules = parseInt(document.getElementById("JoulesEnergy").innerHTML) - 25;
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
@@ -2408,9 +2308,6 @@ function energySelectDown() {
           document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
           document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
         }
-
-
-
         if (chargeJoules >= 200) {
           if (patientState == "VFib") {
             helpController(5);
@@ -2421,16 +2318,10 @@ function energySelectDown() {
             helpController(207);
           }
         }
-
         document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
         document.getElementById("JoulesEnergy").innerHTML = chargeJoules + "J";
-
       }
-
-
-
     }
-
   }
 }
 
@@ -2439,14 +2330,10 @@ function charge() {
   if (on && isLeftPadConnected && isRightPadConnected && (!isCharging) && (!isShockReady) && isElectrodesConnected && isTherapyCableAttached) {
     if (isAEDOn) {
       document.getElementById('ShockAdvised').style.display = "block";
-
     } else if (!isAEDOn && patientState == "VFib" && chargeJoules > 200) {
       document.getElementById('tick').play();
       helpController(7);
-
     }
-
-
     if (patientState == "Sync") {
       helpController(210);
     }
@@ -2476,8 +2363,6 @@ function charge() {
         document.getElementById('shockprompt').play();
       });
     }
-
-
     document.LoadingInterval = setInterval(
       function() {
         if (parseInt(document.getElementById('ShockLoadingBar').style.width) < 190) {
@@ -2485,10 +2370,6 @@ function charge() {
           document.getElementById('ShockLoadingBar').style.width = IntervalHelp + "px";
         } else {
           document.getElementById('ShockAdvised').style.display = "none";
-
-
-
-
           isCharging = false;
           clearTimeout(document.LoadingInterval);
 
@@ -2497,21 +2378,14 @@ function charge() {
           document.getElementById('ShockMenu').style.display = "block";
           document.getElementById('JAvaliable').innerHTML = chargeJoules + "J Available";
           isShockReady = true;
-
           document.interval = setInterval(function() {
             if (document.getElementById("ShockLight").style.display == "none")
               document.getElementById("ShockLight").style.display = "block";
             else document.getElementById("ShockLight").style.display = "none";
           }, 600);
-
         }
       }, fchargeJoules / 4.5);
-
-
-
   } else if (isTestPlugAttached && isTherapyCableAttached) {
-
-
     document.getElementById('tick').play();
     if (!istestPlugCharged) {
       document.getElementById('removetestplug').play();
@@ -2519,8 +2393,6 @@ function charge() {
     } else {
       istestPlugCharged = false;
       document.getElementById('BottomBar').style.display = "block";
-
-
       document.getElementById('ChargingBackground').style.display = "block";
       document.getElementById('ShockLoadingBar').style.width = 0 + "px";
       isCharging = true;
@@ -2534,13 +2406,11 @@ function charge() {
           document.getElementById('shockprompt').play();
         });
       } else if (chargeJoules < 250) {
-
         document.getElementById('200J').play();
         document.getElementById('200J').addEventListener('ended', function() {
           document.getElementById('shockprompt').play();
         });
       } else if (chargeJoules < 350) {
-
         document.getElementById('300J').play();
         document.getElementById('300J').addEventListener('ended', function() {
           document.getElementById('shockprompt').play();
