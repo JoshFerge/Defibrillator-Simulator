@@ -1147,25 +1147,16 @@ $(function() {
   $("#CurrentRight").mouseup(function() {
     document.getElementById('CurrentRight').src = "assets/CurrentRight.png";
   });
-
-
-
   $("#LeftPad").draggable({
     snap: "#LeftTarget",
     snapMode: "inner",
     stop: function(event, ui) {
-
       var lpx = parseInt(document.getElementById("LeftPad").style.left);
       var lpy = parseInt(document.getElementById("LeftPad").style.top);
-
-
       var ltargx = parseInt(document.getElementById("LeftTarget").style.left);
       var ltargy = parseInt(document.getElementById("LeftTarget").style.top);
 
-
-
       if (Math.abs(lpx - ltargx) < 20 && (Math.abs(lpy - ltargy)) < 20) {
-
         isLeftPadConnected = true;
         dataLogString += "LeftPadConnected ";
         ecgController();
@@ -1183,7 +1174,6 @@ $(function() {
   });
 
   $("#RightPad").draggable({
-
     snap: "#RightTarget",
     snapMode: "inner",
     stop: function(event, ui) {
@@ -1192,8 +1182,6 @@ $(function() {
 
       var rtargx = parseInt(document.getElementById("RightTarget").style.left);
       var rtargy = parseInt(document.getElementById("RightTarget").style.top);
-
-
 
       if (Math.abs(rpx - rtargx) < 20 && (Math.abs(rpy - rtargy)) < 20) {
         isRightPadConnected = true;
@@ -1208,15 +1196,9 @@ $(function() {
           document.getElementById('BBText').innerHTML = ("Paddles leads off");
         }
         ecgController();
-
-
       }
-
-      // document.getElementById('HRNum').innerHTML = "---"
     }
   });
-
-
   $('#PauseButton').mousedown(function() {
     dataLogString += "PauseButton ";
     if (ispacerFuncOn) {
@@ -1230,7 +1212,6 @@ $(function() {
       document.getElementById("BottomPaused").style.display = "block";
       document.getElementById('PacerMenu').style.display = "none";
     }
-
   }).bind('mouseup', function() {
     if (ispacerFuncOn) {
       document.bcapsule = b;
@@ -1240,8 +1221,6 @@ $(function() {
       document.getElementById("BottomPaceBar").style.display = "none";
     }
   });
-
-
   $("#EKGConnector").draggable({
     stop: function(event, ui) {
       var ecx = parseInt(document.getElementById('EKGConnector').style.left);
@@ -1250,18 +1229,13 @@ $(function() {
       if (ecx + 60 < 30 && Math.abs(parseInt(ecy) - 580) < 30) {
         isECGStumpAttached = true;
         threeEKGController();
-
       } else {
         isECGStumpAttached = false;
         threeEKGController();
         errorController(6);
       }
-
-
     }
   });
-
-
   $("#TherapyCable").draggable({
     stop: function(event, ui) {
       var tcx = parseInt(document.getElementById('TherapyCable').style.left);
@@ -1288,17 +1262,9 @@ $(function() {
         errorController(5);
       }
     }
-
-
-
   });
-
-
-
-
   $("#TestPlug").draggable({
     stop: function(event, ui) {
-
       var tpy = parseInt(document.getElementById("TestPlug").style.top);
       var tpx = parseInt(document.getElementById("TestPlug").style.left);
       var lpx = parseInt(document.getElementById("GrayCable").style.left);
@@ -1307,8 +1273,6 @@ $(function() {
       if (Math.abs(lpx - tpx) < 15 && (Math.abs(lpy - tpy)) < 15) {
         isTestPlugAttached = true;
       } else {
-
-
         isTestPlugAttached = false;
         if (on) {
           helpController(32);
@@ -1322,8 +1286,6 @@ $(function() {
           }
         }
       }
-
-
     }
   });
 
@@ -1332,28 +1294,20 @@ $(function() {
     snapMode: "outer",
     snapTolerance: 10,
     stop: function(event, ui) {
-
       var lpx = parseInt(document.getElementById("LLEKG").style.left);
       var lpy = parseInt(document.getElementById("LLEKG").style.top);
 
       var lpxt = parseInt(document.getElementById("LLEKGTarget").style.left);
       var lpyt = parseInt(document.getElementById("LLEKGTarget").style.top);
 
-
-
       if (Math.abs(lpx - lpxt) < 40 && (Math.abs(lpy - lpyt)) < 40) {
         dataLogString += "LLEKGConnected ";
         isLLEKGConnected = true;
         threeEKGController();
-
       } else {
         isLLEKGConnected = false;
         threeEKGController();
-
       }
-
-
-
     }
   });
   $("#LAEKG").draggable({
@@ -1361,13 +1315,11 @@ $(function() {
     snapMode: "outer",
     snapTolerance: 10,
     stop: function(event, ui) {
-
       var lpx = parseInt(document.getElementById("LAEKG").style.left);
       var lpy = parseInt(document.getElementById("LAEKG").style.top);
 
       var lpxt = parseInt(document.getElementById("LAEKGTarget").style.left);
       var lpyt = parseInt(document.getElementById("LAEKGTarget").style.top);
-
       if (Math.abs(lpx - lpxt) < 40 && (Math.abs(lpy - lpyt)) < 40) {
         isLAEKGConnected = true;
         dataLogString += "LAEKGConnected ";
@@ -1383,34 +1335,24 @@ $(function() {
     snapMode: "outer",
     snapTolerance: 10,
     stop: function(event, ui) {
-
       var lpx = parseInt(document.getElementById("RAEKG").style.left);
       var lpy = parseInt(document.getElementById("RAEKG").style.top);
 
       var lpxt = parseInt(document.getElementById("RAEKGTarget").style.left);
       var lpyt = parseInt(document.getElementById("RAEKGTarget").style.top);
 
-
       if (Math.abs(lpx - lpxt) < 40 && (Math.abs(lpy - lpyt)) < 40) {
         isRAEKGConnected = true;
         dataLogString += "RAEKGConnected ";
         threeEKGController();
-
       } else {
         isRAEKGConnected = false;
         threeEKGController();
       }
     }
   });
-
-
-
-
 });
-
-
 jsPlumb.ready(function() {
-
   instance = jsPlumb.getInstance({
     DragOptions: {
       cursor: 'pointer',
@@ -1426,9 +1368,7 @@ jsPlumb.ready(function() {
     },
     Endpoint: "Rectangle",
     Anchors: ["TopCenter", "TopCenter"]
-
   });
-
   instance.doWhileSuspended(function() {
     var exampleEndpoint = {
       endpoint: "Blank",
@@ -1438,7 +1378,6 @@ jsPlumb.ready(function() {
         lineWidth: 2
       }
     };
-
     var e1 = instance.addEndpoint('RightPad', {
       anchor: "Bottom"
     }, exampleEndpoint);
@@ -1491,38 +1430,27 @@ jsPlumb.ready(function() {
       snapMode: "outer",
       snapTolerance: 10,
       stop: function(event, ui) {
-
         if (isElectrodesConnected) {
           document.getElementById('WhiteCable').style.left = document.getElementById('GrayCable').style.left;
           document.getElementById('WhiteCable').style.top = document.getElementById('GrayCable').style.top;
         }
-
-
         var lpx = parseInt(document.getElementById("GrayCable").style.left);
         var lpy = parseInt(document.getElementById("GrayCable").style.top);
-
 
         var wpx = parseInt(document.getElementById("WhiteCable").style.left);
         var wpy = parseInt(document.getElementById("WhiteCable").style.top);
 
-
         var tpy = parseInt(document.getElementById("TestPlug").style.top);
         var tpx = parseInt(document.getElementById("TestPlug").style.left);
         if (Math.abs(lpx - tpx) < 15 && (Math.abs(lpy - tpy)) < 15) {
-
           isTestPlugAttached = true;
-
-
         } else {
-
-
           isTestPlugAttached = false
           if (isElectrodesConnected == false) {
             helpController(32);
           }
           document.getElementById("RemoveTestPlug").style.display = "none";
           if ((Math.abs(lpx - wpx) < 50 && (Math.abs(lpy - wpy)) < 30) && isLeftPadConnected && isRightPadConnected && !isTestPlugAttached) {
-
             document.getElementById('GrayCable').style.background = "url('assets/ConnectedCables.png')";
             jsPlumb.detach(conn1);
             jsPlumb.detach(conn2);
@@ -1564,8 +1492,6 @@ jsPlumb.ready(function() {
               document.getElementById('BBText').innerHTML = ("Paddles leads off");
             }
           } else {
-
-
             isElectrodesConnected = false;
             ecgController();
             if (on && isTherapyCableAttached) {
@@ -1574,23 +1500,14 @@ jsPlumb.ready(function() {
               document.getElementById("BottomBar").style.display = "block";
               document.getElementById('BBText').innerHTML = ("Paddles leads off");
             }
-
-
-
           }
-
         }
-
-
       }
     });
-
-
     instance.draggable("WhiteCable", {
       stop: function(event, ui) {
         var lpx = parseInt(document.getElementById("GrayCable").style.left);
         var lpy = parseInt(document.getElementById("GrayCable").style.top);
-
 
         var wpx = parseInt(document.getElementById("WhiteCable").style.left);
         var wpy = parseInt(document.getElementById("WhiteCable").style.top);
@@ -1613,7 +1530,6 @@ jsPlumb.ready(function() {
           document.getElementById("ConnectElectrodes").style.display = "none";
           document.getElementById("BottomBar").style.display = "none";
           ecgController();
-
         } else if ((Math.abs(lpx - wpx) < 50 && (Math.abs(lpy - wpy)) < 30) && !isTestPlugAttached) {
           isElectrodesConnected = true;
           document.getElementById('GrayCable').style.background = "url('assets/ConnectedCables.png')";
@@ -1629,7 +1545,6 @@ jsPlumb.ready(function() {
           });
           document.getElementById('GrayCable').style.width = "70px";
           document.getElementById('WhiteCable').style.display = "none";
-
         } else {
           isElectrodesConnected = false;
           ecgController();
@@ -1648,19 +1563,11 @@ jsPlumb.ready(function() {
     instance.draggable("LAEKG");
     instance.draggable("RAEKG");
     instance.draggable("EKGConnector");
-
   });
-
-
-
-
 });
 
-
 function caseSelection(caseNum) {
-
   if (caseNum == 0) {
-
     document.getElementById("RightTarget").style.left = '949px';
     document.getElementById("RightTarget").style.top = '389px';
 
@@ -1676,19 +1583,14 @@ function caseSelection(caseNum) {
     document.getElementById("RAEKGTarget").style.left = '855px';
     document.getElementById("RAEKGTarget").style.top = '362px';
 
-
     document.getElementById('AdultDummy').src = "assets/adult-teen.png";
     document.getElementById('AdultDummy').style.top = "200px";
-
-
 
     patientState = "MouseOver";
     isTutorialOn = true;
     $('#PatientInfo').html("He is not breathing. You cannot feel a central pulse. Using your mouse, press \"Start CPR\" ");
     document.getElementById('PatientWeight').innerHTML = "Weight: 60 kg";
     helpController(0);
-
-
   }
 
   if (caseNum == 1) {
@@ -1707,10 +1609,8 @@ function caseSelection(caseNum) {
     document.getElementById("RAEKGTarget").style.left = '855px';
     document.getElementById("RAEKGTarget").style.top = '373px';
 
-
     document.getElementById('AdultDummy').src = "assets/olderman.png";
     document.getElementById('AdultDummy').style.top = "200px";
-
 
     document.getElementById('Continue').innerHTML = "<a href=\"Tutorial.html?testnum=1&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\">Click Here to Restart This Case</a>";
     document.getElementById('IntroModal').style.display = "none";
@@ -1725,10 +1625,6 @@ function caseSelection(caseNum) {
     $('#PatientInfo').html("He is not breathing. You cannot feel a central pulse.");
     document.getElementById('PatientWeight').innerHTML = "";
     helpController(0);
-
-
-
-
   }
   if (caseNum == 2) {
     document.getElementById("RightTarget").style.left = '936px';
@@ -1746,9 +1642,6 @@ function caseSelection(caseNum) {
     document.getElementById("RAEKGTarget").style.left = '855px';
     document.getElementById("RAEKGTarget").style.top = '362px';
 
-
-
-
     document.getElementById('AdultDummy').src = "assets/child.png";
     document.getElementById('IntroModal').style.display = "none";
     document.getElementById('Continue').innerHTML = "<a href=\"Tutorial.html?testnum=2&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\">Click Here to Restart This Case</a>"
@@ -1765,8 +1658,6 @@ function caseSelection(caseNum) {
     document.getElementById('PatientWeight').innerHTML = "Weight: 14kg";
   }
   if (caseNum == 3) {
-
-
     document.getElementById("RightTarget").style.left = '952px';
     document.getElementById("RightTarget").style.top = '412px';
 
@@ -1790,7 +1681,6 @@ function caseSelection(caseNum) {
     document.getElementById('RightPad').style.top = "573px";
     instance.repaintEverything();
 
-
     document.getElementById('AdultDummy').src = "assets/infant.png";
     document.getElementById('AdultDummy').style.top = "200px";
 
@@ -1808,12 +1698,8 @@ function caseSelection(caseNum) {
     $('#PatientInfo').html("The infant is breathing. He is somewhat pale. You feel a faint central pulse.");
     helpController(200);
     document.getElementById('PatientWeight').innerHTML = "Weight: 10kg";
-
-
   }
   if (caseNum == 4) {
-
-
     document.getElementById("RightTarget").style.left = '952px';
     document.getElementById("RightTarget").style.top = '412px';
 
@@ -1837,16 +1723,12 @@ function caseSelection(caseNum) {
     document.getElementById('RightPad').style.top = "473px";
     instance.repaintEverything();
 
-
     document.getElementById('AdultDummy').src = "assets/infant.png";
     document.getElementById('AdultDummy').style.top = "200px";
-
-
 
     casePointsTimeDeduction = setTimeout(function() {
       TestCase1.TotalPoints -= 10;
     }, 60000);
-
 
     document.getElementById('Continue').style.display = "none";
     isTestOn = true;
@@ -1865,11 +1747,8 @@ function caseSelection(caseNum) {
     document.getElementById('PatientWeight').innerHTML = "Weight: 6kg";
 
     CPRDeathTime = setTimeout(function() {
-
-
       TestCase1.SurvivalStateReached = false;
       TestCase1.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
-
 
       if (TestCase1.TotalCaseTime > 60 * 4) {
         TestCase1.CaseTimeMoreThanFourMin = true;
@@ -1877,7 +1756,6 @@ function caseSelection(caseNum) {
       if (TestCase1.TotalCaseTime < 60 * 2) {
         TestCase1.CaseTimeLessThan2Min = true;
       }
-
       TestCase1.TotalPoints = TestCase1.TotalPoints - 100;
       TestCase1.DeathStateReached = true;
       HRNum = 0;
@@ -1889,13 +1767,7 @@ function caseSelection(caseNum) {
       setTimeout(function() {
         errorController(10);
       }, 1000);
-
-
-
     }, 45000);
-
-
-
   }
   if (caseNum == 6) {
 
@@ -1913,7 +1785,6 @@ function caseSelection(caseNum) {
 
     document.getElementById("RAEKGTarget").style.left = '855px';
     document.getElementById("RAEKGTarget").style.top = '362px';
-
 
     document.getElementById('AdultDummy').src = "assets/adult-teen.png";
     document.getElementById('AdultDummy').style.top = "200px";
@@ -1966,11 +1837,8 @@ function caseSelection(caseNum) {
       TestCase2.TotalPoints -= 10;
     }, 150000);
 
-
     document.getElementById('AdultDummy').src = "assets/infant.png";
     document.getElementById('AdultDummy').style.top = "200px";
-
-
 
     document.getElementById('Continue').style.display = "none";
     isTestOn = true;
