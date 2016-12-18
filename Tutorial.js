@@ -158,7 +158,6 @@ var params = parseQueryString();
 if (DefibSession.UserId == '' && params['user'] != '') {
   DefibSession.UserId = params['user'];
 }
-
 function transformMiliseconds(t) {
   var h = Math.floor((t / (1000 * 60 * 60)) % 24);
   var m = Math.floor((t / (1000 * 60)) % 60);
@@ -685,7 +684,6 @@ $(function() {
       $("a.youtube").YouTubePopup();
     });
   }
-
   $("#ShockButton").mousedown(function() {
       if (isTestPlugAttached || !isElectrodesConnected) {
         return;
@@ -709,7 +707,6 @@ $(function() {
           document.getElementById('shockprompt').pause();
           setTimeout(function() {
             document.getElementById('EnergyDelivered').style.display = "none";
-
           }, 5000);
         }, 1000);
       } else if ((patientState == "VTac" || patientState == "Sync") && isTestOn && chargeJoules > 84 && isShockReady) {
@@ -731,7 +728,6 @@ $(function() {
         if (TestCase2.TotalCaseTime < 60 * 2) {
           TestCase2.CaseTimeLessThan2Min = true;
         }
-
         HRNum = 0;
         document.getElementById('HRNum').innerHTML = HRNum;
 
@@ -2634,11 +2630,9 @@ function analyze() {
     if (patientState == "VFib") {
       helpController(10);
     }
-
     if (patientState == "VTac" && !isTestOn) {
       errorController(4);
     }
-
     isAEDOn = true;
     chargeJoules = 200;
     document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
@@ -2668,7 +2662,6 @@ function analyze() {
         document.getElementById('analyzingnowstandclear').addEventListener('ended', function() {
           document.getElementById('shockadvised').play();
         });
-
         document.getElementById('AnalyzeLight2').style.display = "none";
         chargeJoules = 200;
         document.getElementById("AnalyzeMenu").style.display = "none";

@@ -2,23 +2,18 @@
 <html>
 	<head>
 		<title>Lifepak simulator</title>
-
-		
 		<link rel="stylesheet" type="text/css" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.min.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
-	<body>	
-		
-
+	<body>
 		<script src="jquery-1.11.1.min.js"></script>
 		<script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 		<script src="jsPlumb-master/dist/js/jquery.jsPlumb-1.6.2-min.js"></script>
 		<script type="text/javascript" src="youtubepopup.js"></script>
 		<script src="Tutorial.js"></script>
-		
-		
+
 		<audio id="analyzingnowstandclear" src="assets/audio/analyzingnowstandclear.mp3"> </audio>
-		
+
 		<audio id="player" src="assets/audio/turnon.mp3"> </audio>
 		<audio id="error" src="assets/audio/error.mp3"> </audio>
 		<audio id="tick" src="assets/audio/tick.mp3"> </audio>
@@ -33,10 +28,8 @@
 		<audio id="connectelectrodes" src="assets/audio/connectelectrodes.mp3"> </audio>
 		<div class="button" style="z-index:1000" id="back"><a id="lnkBack" href="index.html" style="z-index:1000">&#60; Back</a></div>
 
-
 		<div id='time_ticker_label'>Time:</div>
 		<div id='score_label'>Score:</div>
-
 
 		<div id='time_ticker'></div>
 		<div id='score'>0</div>
@@ -117,8 +110,6 @@
 		</div>
 
 		<div id="CPRStatus" class="button ">CPR IS BEING ADMINISTERED</div>
-
-
 		<div id="Charging" class="button ">
 			<p class="MenuText" id="ChargingTo">Charging to </p>
 			<img  id="ShockLoadingBar" style="position:absolute; margin:0" src="assets/ShockLoading.png">
@@ -126,14 +117,14 @@
 
 		</div>
 		<div id="ShockMenu" class="button">
-			<p class="MenuText" id="JAvaliable">Available</p> 	
+			<p class="MenuText" id="JAvaliable">Available</p>
 			<p class="MenuText Inline" id="Push">Push</p><img id="ShockButtonScreen" src="assets/Shock.png"> <p id="LastWord" class="MenuText Inline">Button!</p>
 			<p class="MenuText" id="Disarm">Push Speed Dial to Disarm</p>
 		</div>
 		<div id="EnergyDelivered" class="button"><p class="MenuText">Energy Delivered</p></div>
 		<div id="ShockAdvised" class="button">Shock Advised</div>
 		<div id="AnalyzeMenu" class="button">
-			
+
 			<p class="MenuText" id="AnalyzeText">Analyzing Now -- Stand Clear</p>
 
 		</div>
@@ -151,26 +142,12 @@
 			<div id="CurrentJShock" style="position:absolute">2J</div>
 			<div id="Time" style="position:absolute"></div>
 			<img id="Battery" src="assets/Battery.png" style="left:473px; top:130px; position:absolute">
-			
+
 			<img class="button" id="Ticker" style="margin:0" src="assets/Ticker.png">
 			<img class="button" id="PaddlesX1" src="assets/PaddlesX1.png">
 			<img style="position:absolute" id="Heart" src="assets/Heart.png">
 		</div>
 
-		
-			<!-- <ul id="CaseSelection">
-				<li onclick="caseSelection(1)"> Case I</li>
-				<li onclick="caseSelection(2)">Case II</li>
-				<li onclick="caseSelection(3)">Case III</li>
-			</ul>
-		 -->
-
-
-
-		<!-- <div id="Score">
-			<p>Score: 0</p>
-			<p>Time:</p><p>1:00</p>
-		</div> -->
 		<div id="StartInfo" title=""></div>
 		<div id="PatientStatus" title="">
  			 <p id="PatientInfo">The infant is breathing. She is somewhat pale. You feel a faint central pulse.</p>
@@ -189,7 +166,7 @@
 		<img id="Alarms" class="button" src="assets/RightPadTarget.png">
 		<img id="Options" class="button" src="assets/RightPadTarget.png">
 		<img id="HomeScreen" class="button" src="assets/RightPadTarget.png">
-		
+
 		<img class="button" id="EKGPort" src="assets/RightPadTarget.png"></div>
 		<img class="button" id="TherapyPort" src="assets/RightPadTarget.png"></div>
 
@@ -198,13 +175,10 @@
 		<form action="demo_form.asp" method="post">
 		<input id="hidden_field" name="hidden_field" type="hidden" value="123" />
 		</form>
-
         <script type="text/javascript">
             var parseQueryString = function () {
-
                 var str = window.location.search;
                 var objURL = {};
-
                 str.replace(
                     new RegExp("([^?=&]+)(=([^&]*))?", "g"),
                     function ($0, $1, $2, $3) {
@@ -220,10 +194,5 @@
             cont.setAttribute("href", 'Tutorial.html?testnum=1&user=' + params['user']);
             back.setAttribute("href", 'Index.html?user=' + params['user']);
         </script>
-
-
-
-		
-
 	</body>
 </html>
