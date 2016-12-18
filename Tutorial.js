@@ -1,6 +1,6 @@
+// For Old IE
 if (!window.console) window.console = {};
 if (!window.console.log) {}
-
 
 var analyzeCharge;
 var on = false;
@@ -9,7 +9,7 @@ var chargeJoules = 2;
 var fchargeJoules = 2;
 var isShockReady = false;
 var initp = 130;
-ShockSwitch = false;
+var ShockSwitch = false;
 var PacerCurrent = 30;
 var PacerRate = 100;
 var isPacerOn = false;
@@ -422,8 +422,6 @@ $(function() {
       TestCase1.DeathStateReached = true;
       document.getElementById("PatientInfo").innerHTML = "Unfortunately the baby has died. You will need to speak with the family. Please review VF management and repeat the VF cases on the simulator another time. <a href=\"Tutorial.html?testnum=5&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
 
-
-
       TestCase1.SurvivalStateReached = false;
       TestCase1.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
 
@@ -435,23 +433,16 @@ $(function() {
         TestCase1.CaseTimeLessThan2Min = true;
       }
       sendPostData(TestCase1);
-
       errorController(10);
-
     }
-
 
     if (GetUrlValue('testnum') == 5) {
       TestCase2.DeathStateReached = true;
       document.getElementById("PatientInfo").innerHTML = "Unfortunately, the baby has died. You will need to speak with the family. Please review SVT management and repeat the case on the simulator another time. <a href=\"Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
 
-
-
-
       TestCase2.SurvivalStateReached = false;
       TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
       TestCase2.TotalPoints -= 100;
-
 
       if (TestCase2.TotalCaseTime > 60 * 4) {
         TestCase2.CaseTimeMoreThanFourMin = true;
@@ -461,7 +452,6 @@ $(function() {
       }
       sendPostData(TestCase2);
       errorController(11);
-
     }
 
     if (GetUrlValue('testnum') == 6) {
@@ -484,7 +474,6 @@ $(function() {
 
     }
 
-
     clearTimeout(casePointsTimeDeduction);
     patientState = "Dead";
     HRNum = 0;
@@ -500,7 +489,7 @@ $(function() {
   document.getElementById("WhiteCable").style.left = "850px";
   document.getElementById("WhiteCable").style.top = "550px";
   caseSelection(GetUrlValue("testnum"));
-    // if (!isTutorialOn) {	
+    // if (!isTutorialOn) {
     // 	document.getElementById('Continue').innerHTML = "<div class=\"button\" id=\"Continue\"><a href=\"Tutorial.html?testnum="+GetUrlValue("testnum")+"\">Click here to repeat case</a></div>"
 
   // }
@@ -515,8 +504,6 @@ $(function() {
 
   }
   if (isTutorialOn) {
-
-
     document.getElementById('Close').style.display = "block";
     document.getElementById('PatientWeight').style.display = "none";
     document.getElementById('CaseDescription').style.display = "none";
@@ -563,8 +550,6 @@ $(function() {
     $("#IntroModal").dialog({
       modal: true,
       dialogClass: "helpDialog"
-
-
     });
     var tutStatement;
     var tutStatement2;
@@ -607,13 +592,11 @@ $(function() {
           tutTitle = "Analyze";
           top = 70;
           left = 150;
-
           break;
         case "Pacer":
           tutStatement = "Pressing the PACER button engages the machine's pacing functions.<i>The Lifepak's own ECG leads must be attached to the patient in order to perform demand pacing.</i>";
           tutTitle = "Pacer";
           break;
-
         case "Sync":
           tutStatement = "Pressing the SYNC button engages the machine's ability to time the delivery of a shock to the patient's QRS complex. You must press and HOLD the Shock Button.<br> <a class=\"youtube\" href=\"https://www.youtube.com/watch?v=4yQvfTjHlHw\">Synchronized Cardioversion <img class='playicon' style='vertical-align:bottom'  width='30' src='assets/playicon.png'></a>";
           tutTitle = "Sync";
@@ -715,9 +698,7 @@ $(function() {
           tutTitle = "Help";
           tutStatement = "Clicking the HELP button will tell you what to do next during the Tutorial Cases. HELP will not be available during the Test Cases.";
           break;
-
       }
-
 
       document.getElementById("TutorialDialog").innerHTML = tutStatement;
       $('#TutorialDialog').dialog({
@@ -739,27 +720,15 @@ $(function() {
         tutStatement2 = undefined;
       }
       $("a.youtube").YouTubePopup();
-
-
-
     });
   }
 
-
-
-
   $("#ShockButton").mousedown(function() {
-
       if (isTestPlugAttached || !isElectrodesConnected) {
         return;
       }
       if (patientState == "Sync" && chargeJoules <= 20 && !isTestOn && isShockReady) {
-
-
-
         document.shockTimeout = setTimeout(function() {
-
-
           rhythmChange(initp, "black url('assets/NormalRate.png')");
           clearTimeout(casePointsTimeDeduction);
           clearTimeout(MinDeathTimeout);
@@ -774,17 +743,11 @@ $(function() {
           clearInterval(document.syncInterval);
           document.getElementById("SyncLight").style.display = "none";
           document.getElementById('EnergyDelivered').style.display = "block";
-
           document.getElementById('shockprompt').pause();
-
-
-
           setTimeout(function() {
             document.getElementById('EnergyDelivered').style.display = "none";
 
           }, 5000);
-
-
         }, 1000);
       } else if ((patientState == "VTac" || patientState == "Sync") && isTestOn && chargeJoules > 84 && isShockReady) {
         TestCase2.DeathStateReached = true;
@@ -819,22 +782,15 @@ $(function() {
         document.getElementById('shockprompt').pause();
         isShockReady = false;
 
-
-
-
         setTimeout(function() {
           document.getElementById('EnergyDelivered').style.display = "none";
-
         }, 5000);
-
-
 
         sendPostData(TestCase2);
         setTimeout(function() {
           errorController(11);
         }, 1000);
       } else if (patientState == "VTac" && isTestOn && !isSyncOn && isShockReady) {
-
         othershockbool = false;
         TestCase2.ShockWithoutSync = true;
         TestCase2.VFibStateEntered = true;
@@ -848,11 +804,8 @@ $(function() {
         document.getElementById('EnergyDelivered').style.display = "block";
         clearInterval(document.syncInterval);
         document.getElementById("SyncLight").style.display = "none";
-
         document.getElementById('shockprompt').pause();
         isShockReady = false;
-
-
         setTimeout(function() {
           othershockbool = true;
         }, 1000);
@@ -864,10 +817,6 @@ $(function() {
         document.getElementById("ShockLight").style.display = "none";
         clearInterval(document.interval);
         document.getElementById('ShockMenu').style.display = "none";
-
-
-
-
         CPRDeathTime = setTimeout(function() {
           TestCase2.SurvivalStateReached = false;
           TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
@@ -889,10 +838,6 @@ $(function() {
           setTimeout(function() {
             errorController(11);
           }, 1000);
-
-
-
-
         }, 45000);
 
       } else if (patientState == "Sync" && isTestOn && isSyncOn && chargeJoules < 85 && chargeJoules > 4 && isShockReady) {
@@ -927,7 +872,6 @@ $(function() {
                 modal: true,
                 autoOpen: true
               });
-
             } else {
               document.getElementById("EndDialog").innerHTML = "Good job!  The baby is awake and breathing spontaneously. The pulse is strong. BP 82/40. <a href='Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "'>Click here to move on to the last Test Case</a>.";
               $('#EndDialog').dialog({
@@ -938,9 +882,6 @@ $(function() {
               });
 
             }
-
-
-
           }, 30000);
           isSyncOn = false;
           clearInterval(document.syncInterval);
@@ -958,39 +899,26 @@ $(function() {
           clearTimeout(casePointsTimeDeduction);
           setTimeout(function() {
             document.getElementById('EnergyDelivered').style.display = "none";
-
           }, 5000);
-
-
         }, 1000);
-
       } else if (patientState == "Sync" && isTestOn && isSyncOn && chargeJoules <= 4 && isShockReady) {
         document.shockTimeout = setTimeout(function() {
           rhythmChange(initp, "black url('assets/SVT.png')");
           isSyncOn = false;
-
           document.getElementById("SyncLight").style.display = "none";
-
-
           clearInterval(document.syncInterval);
           document.getElementById("SyncLight").style.display = "none";
           document.getElementById('EnergyDelivered').style.display = "block";
-
           document.getElementById('shockprompt').pause();
           document.getElementById("ShockLight").style.display = "none";
           clearInterval(document.interval);
           document.getElementById('ShockMenu').style.display = "none";
           isShockReady = false;
           patientState = "VTac";
-
           setTimeout(function() {
             document.getElementById('EnergyDelivered').style.display = "none";
-
           }, 5000);
-
-
         }, 1000);
-
       } else if (patientState == "VTac" && !isTestOn) {
         errorController(7);
       } else if (patientState == "Sync" && chargeJoules > 20 && !isTestOn) {
@@ -1027,7 +955,6 @@ $(function() {
   $("#Assess").click(function(e) {
     e.preventDefault();
     dataLogString += "AssessButton ";
-
     if (patientState == "GoodWithPace" && !isTestOn) {
 
       $('#PatientInfo').html("The patient is awake and breathing, with a pulse of 100 (equal to the pacing rate) and BP 92/60.Congratulations!  You saved the patient. <a href='Tutorial.html?testnum=3&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.");
@@ -1036,7 +963,6 @@ $(function() {
         autoOpen: true,
         modal: true
       });
-
     }
     if (patientState == "GoodWithPace" && isTestOn) {
       if (GetUrlValue('testnum') == 6) {
@@ -1050,32 +976,23 @@ $(function() {
         if (TestCase3.TotalCaseTime < 60 * 2) {
           TestCase3.CaseTimeLessThan2Min = true;
         }
-
         TestCase3.ClickedAssessAfterPatient = true;
         sendPostData(TestCase3);
-
-        // $('#hidden_field').submit();
       }
-
       $('#PatientInfo').html(" Good job! The patient is awake and breathing, with a pulse of 100 (or equal to the pacing rate) and BP 92/60. Congratulations. You have now completed all the test cases on this simulator. Please close your browser window to end your session.");
       $('#PatientStatus').dialog({
         title: "Congratulations!",
         autoOpen: true,
         modal: true
       });
-
     } else if (patientState == "NormalVTac") {
-
       if (GetUrlValue('testnum') == 5) {
-
         TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
         TestCase2.SurvivalStateReached = true;
         clearTimeout(MinDeathTimeout);
         clearTimeout(SyncwinTimeout);
         $('#obj').val(JSON.stringify(TestCase2));
-
       }
-
       if (TestCase2.TotalCaseTime > 60 * 4) {
         TestCase2.CaseTimeMoreThanFourMin = true;
       }
@@ -1093,7 +1010,6 @@ $(function() {
           modal: true,
           autoOpen: true
         });
-
       } else {
         document.getElementById("EndDialog").innerHTML = "Good job!  The baby is awake and breathing spontaneously. The pulse is strong. BP 82/40. <a href='Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "'>Click here to move on to the last Test Case</a>.";
         $('#EndDialog').dialog({
@@ -1102,11 +1018,8 @@ $(function() {
           modal: true,
           autoOpen: true
         });
-
       }
     } else {
-
-
       $('#PatientStatus').dialog('open');
       if (patientState == "SlowRhythm" && firstassess === true) {
         helpController(101);
@@ -1123,7 +1036,6 @@ $(function() {
         helpController(2);
         firstassess = false;
       }
-
     }
   });
   if (!isTestOn) {
@@ -1132,59 +1044,42 @@ $(function() {
       position: [1100, 450],
       autoOpen: false,
       dialogClass: "helpDialog"
-
-
     });
   }
-
   $('#HelpDialog').dialog({
     position: [1500, 650],
     autoOpen: false
-
-
   });
-
   $('#EndDialog').dialog({
     dialogClass: "statusDialog",
     autoOpen: false
-
-
   });
-
   $("#HelpDialog2").dialog({
     autoOpen: false,
     dialogClass: "helpDialog"
-
   });
-
   $("#Help").click(function(e) {
     if (!isTestOn) {
       e.preventDefault();
       if (!isTutorialOn)
         $('#HelpDialog').dialog('open');
     }
-
   });
-
-
   $("#OnOff").mouseup(function() {
     document.getElementById('OnOff').src = "assets/LifePakOnOn.png";
   });
-
   $("#Charge").mousedown(function() {
     document.getElementById('Charge').src = "assets/Charge_active.png";
   });
   $("#Charge").mouseup(function() {
     document.getElementById('Charge').src = "assets/Charge.png";
   });
-
   $("#AnalyzeButton").mousedown(function() {
     document.getElementById('AnalyzeButton').src = "assets/Analyze_active.png";
   });
   $("#AnalyzeButton").mouseup(function() {
     document.getElementById('AnalyzeButton').src = "assets/Analyze.png";
   });
-
   $("#Sync").mousedown(function() {
     document.getElementById('Sync').src = "assets/Sync_active.png";
   });
@@ -1210,7 +1105,6 @@ $(function() {
   $("#PauseButton").mouseup(function() {
     document.getElementById('PauseButton').src = "assets/PauseButton.png";
   });
-
   $("#ShockButton").mousedown(function() {
     document.getElementById('ShockButton').src = "assets/Shock_active.png";
   });
@@ -1260,7 +1154,7 @@ $(function() {
     snap: "#LeftTarget",
     snapMode: "inner",
     stop: function(event, ui) {
-      
+
       var lpx = parseInt(document.getElementById("LeftPad").style.left);
       var lpy = parseInt(document.getElementById("LeftPad").style.top);
 
