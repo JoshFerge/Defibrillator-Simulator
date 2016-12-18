@@ -9,7 +9,6 @@ var chargeJoules = 2;
 var fchargeJoules = 2;
 var isShockReady = false;
 var initp = 130;
-var ShockSwitch = false;
 var PacerCurrent = 30;
 var PacerRate = 100;
 var isPacerOn = false;
@@ -50,7 +49,6 @@ var istestPlugCharged = false;
 var dataLogString = "";
 var isTestOn = false;
 var CPRDeathTime;
-var NoCPRVictory;
 var HRNum;
 var MinDeathTimeout;
 var errorstatus;
@@ -81,7 +79,6 @@ var TestCase1 = {
   CaseTimeLessThan2Min: false,
   TotalPoints: 0
 };
-//var TestCase1 = {Casenum:1,UserID:"d", FirstTimeUser:true, SessionDate:50, TimeToStartCPR:"d",TimeToTurnDefibOn:"d",TimeToPadsAttached:"d",ShocKWithEnergyGreaterThan59:"d",AnalyzePressed:false,ShockInAnalyze:false,ClickedStartCPRAfterShock:false,SurvivalStateReached:false,DeathStateReached:false,TotalCaseTime:"d",CaseTimeMoreThanFourMin:false,CaseTimeLessThan2Min:false,TotalPoints:0};
 var TestCase2 = {
   Casenum: 2,
   UserID: "d",
@@ -104,7 +101,6 @@ var TestCase2 = {
   CaseTimeLessThan2Min: false,
   TotalPoints: 0
 };
-//var TestCase2 = {Casenum:2,UserID:"d", FirstTimeUser:true, SessionDate:50, VFibStateEntered:false, TimeToStartCPRAfterVFib:0,TimeToTurnDefibOn:"d",TimeToPadsAttached:"d",ShockWithEnergyGreaterThan84:false,VFibStartTime:0,ShockWithoutSync:false,AnalyzePressed:false,ShockInAnalyze:false,StartedCPRAfterVFibShock:false,SurvivalStateReached:false,DeathStateReached:false,TotalCaseTime:"",CaseTimeMoreThanFourMin:false,CaseTimeLessThan2Min:false,TotalPoints:0};
 var TestCase3 = {
   Casenum: 3,
   UserID: "d",
@@ -125,8 +121,6 @@ var TestCase3 = {
   CaseTimeLessThan2Min: false,
   TotalPoints: 0
 };
-//var TestCase3 = {Casenum:3,UserID:"d", FirstTimeUser:true, SessionDate:50,TimeToTurnDefibOn:-1,TimeToPadsAttached:-1,ECGLeadsPlaced:false,TimeToECGLeadsPlaced:-1,EnergySelectWhilePacing:false,AnalyzePressed:false,ShockInAnalyze:false,SurvivalStateReached: false,ClickedAssessAfterPatient:false, DeathStateReached:false,TotalCaseTime:"",CaseTimeMoreThanFourMin:false,CaseTimeLessThan2Min:false,TotalPoints:0};
-
 var objToday = new Date(),
   weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
   dayOfWeek = weekday[objToday.getDay()],
@@ -146,17 +140,12 @@ TestCase3.SessionDate = today;
 TestCase2.SessionDate = today;
 TestCase1.SessionDate = today;
 
-
-
-
 var startTime = new Date() / 1000;
 var tickTime = new Date();
 
 var parseQueryString = function() {
-
   var str = window.location.search;
   var objURL = {};
-
   str.replace(
     new RegExp("([^?=&]+)(=([^&]*))?", "g"),
     function($0, $1, $2, $3) {
@@ -166,7 +155,6 @@ var parseQueryString = function() {
   return objURL;
 };
 var params = parseQueryString();
-
 if (DefibSession.UserId == '' && params['user'] != '') {
   DefibSession.UserId = params['user'];
 }
@@ -181,8 +169,6 @@ function transformMiliseconds(t) {
   s = (s < 10) ? '0' + s : s;
   return h + ':' + m + ':' + s;
 }
-
-
 //ticker function that will refresh our display every second
 function tick1() {
   var newd = new Date();
@@ -213,11 +199,8 @@ if (GetUrlValue('testnum') == 4)
 if (GetUrlValue('testnum') == 5)
   var t = setInterval(tick2, 1000);
 
-
 if (GetUrlValue('testnum') == 6)
   var t = setInterval(tick3, 1000);
-
-
 
 function GetUrlValue(VarSearch) {
   var SearchString = window.location.search.substring(1);
@@ -230,20 +213,16 @@ function GetUrlValue(VarSearch) {
   }
 }
 
-
 function sendPostData(data) {
   alert('NOTE: This is for debugging purposes.\nIf you see this message then sendPostData was called\nand we will try to log the results now.');
-
   var sessId = params["sess"];
   if (sessId && sessId > 1) {
     DefibSession.Id = sessId;
   }
-
   var userId = params["user"];
   if (userId) {
     DefibSession.UserId = params["user"];
   }
-
   if (DefibSession.Id == -1) {
     DefibSession.SessionDate = new Date();
     $.ajax({
@@ -303,9 +282,7 @@ function postCaseResult(data) {
   }
 }
 
-
 function showMeHow() {
-
   if (isRAEKGConnected && isLAEKGConnected && isLLEKGConnected) {
     $("#LAEKG").animate({
       "left": "946px",
@@ -325,8 +302,6 @@ function showMeHow() {
     document.getElementById('EKGBox').style.display = "block";
     document.getElementById('EKGBoxText').style.display = "block";
     threeEKGController();
-
-
   } else {
     $("#LAEKG").animate({
       "left": "941px",
@@ -372,7 +347,6 @@ function showMeHow2() {
     isTestPlugAttached = false;
     document.getElementById('RemoveTestPlug').style.display = "none";
     ecgController();
-
   } else {
     instance.animate($("#LeftPad"), {
       "left": "838px",
@@ -397,20 +371,13 @@ function showMeHow2() {
     isTherapyCableAttached = true;
     isTestPlugAttached = false;
     document.getElementById('RemoveTestPlug').style.display = "none";
-
-
     ecgController();
   }
-
-
 }
-
 
 document.syncInterval = -1;
 document.bcapsule = "black url('assets/Flatline.png')";
 document.ccapsule = "black url('assets/Flatline.png')";
-
-
 
 $(function() {
   document.getElementById('shockprompt').addEventListener('ended', function() {
@@ -435,7 +402,6 @@ $(function() {
       sendPostData(TestCase1);
       errorController(10);
     }
-
     if (GetUrlValue('testnum') == 5) {
       TestCase2.DeathStateReached = true;
       document.getElementById("PatientInfo").innerHTML = "Unfortunately, the baby has died. You will need to speak with the family. Please review SVT management and repeat the case on the simulator another time. <a href=\"Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
@@ -453,7 +419,6 @@ $(function() {
       sendPostData(TestCase2);
       errorController(11);
     }
-
     if (GetUrlValue('testnum') == 6) {
       document.getElementById("PatientInfo").innerHTML = "Unfortunately your patient has died. You will need to speak with the family. Please review how to performa transcutaneous pacing and try this case again another time. You have now completed all the test cases on this simulator.";
       TestCase3.DeathStateReached = true;
@@ -471,14 +436,12 @@ $(function() {
       errorController(12);
     }
     if (GetUrlValue('testnum') == 1 || GetUrlValue('testnum') == 2 || GetUrlValue('testnum') == 3) {
-
     }
 
     clearTimeout(casePointsTimeDeduction);
     patientState = "Dead";
     HRNum = 0;
     document.getElementById('HRNum').innerHTML = HRNum;
-
     rhythmChange(initp, "black url('assets/DeadLine.png')");
 
   }, 600000); //600000  20000
@@ -880,7 +843,6 @@ $(function() {
                 modal: true,
                 autoOpen: true
               });
-
             }
           }, 30000);
           isSyncOn = false;
@@ -926,7 +888,6 @@ $(function() {
       }
     }
   );
-
   $("#ShockButton").mouseup(function() {
     clearTimeout(document.shockTimeout);
   });
@@ -936,8 +897,6 @@ $(function() {
     autoOpen: false,
     dialogClass: "statusDialog",
     closeText: "close"
-
-
   });
   $('#PatientStatus').dialog({
     title: "Status",
@@ -951,12 +910,10 @@ $(function() {
 
   });
   var firstassess = true;
-
   $("#Assess").click(function(e) {
     e.preventDefault();
     dataLogString += "AssessButton ";
     if (patientState == "GoodWithPace" && !isTestOn) {
-
       $('#PatientInfo').html("The patient is awake and breathing, with a pulse of 100 (equal to the pacing rate) and BP 92/60.Congratulations!  You saved the patient. <a href='Tutorial.html?testnum=3&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.");
       $('#PatientStatus').dialog({
         title: "Congratulations!",
@@ -969,7 +926,6 @@ $(function() {
         TestCase3.SurvivalStateReached = true;
         clearTimeout(MinDeathTimeout);
         TestCase3.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
-
         if (TestCase3.TotalCaseTime > 60 * 4) {
           TestCase3.CaseTimeMoreThanFourMin = true;
         }
@@ -1030,7 +986,6 @@ $(function() {
         helpController(201);
         firstassess = false;
       }
-
       if (patientState == "VFib" && firstassess === true) {
         TestCase1.TotalPoints += 5;
         helpController(2);
@@ -1770,7 +1725,6 @@ function caseSelection(caseNum) {
     }, 45000);
   }
   if (caseNum == 6) {
-
     document.getElementById("RightTarget").style.left = '949px';
     document.getElementById("RightTarget").style.top = '389px';
 
@@ -1805,11 +1759,8 @@ function caseSelection(caseNum) {
     $('#PatientInfo').html("The patient is sleepy but arousable. He is breathing spontaneously and has a palpable pulse. BP is 64/29.");
     helpController(200);
     document.getElementById('PatientWeight').innerHTML = "Weight: 65kg";
-
-
   }
   if (caseNum == 5) {
-
     document.getElementById("RightTarget").style.left = '952px';
     document.getElementById("RightTarget").style.top = '412px';
 
@@ -1824,7 +1775,6 @@ function caseSelection(caseNum) {
 
     document.getElementById("RAEKGTarget").style.left = '890px';
     document.getElementById("RAEKGTarget").style.top = '390px';
-
 
     document.getElementById('LeftPad').style.left = "1054px";
     document.getElementById('LeftPad').style.top = "473px";
@@ -1862,7 +1812,6 @@ function caseSelection(caseNum) {
 function updateTime() {
   var d = new Date();
   document.getElementById('Time').innerHTML = ('0' + d.getHours()).slice(-2) + ":" + ('0' + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
-
 }
 setInterval(updateTime, 1000);
 
@@ -2084,7 +2033,6 @@ function energySelectUp() {
             helpController(5);
           }
         }
-
         if (chargeJoules >= 5) {
           if (patientState == "VTac") {
             helpController(207);
@@ -2101,7 +2049,6 @@ function energySelectUp() {
       }, 5000);
       turnEnergyOff;
     }
-
   } else if (isTestPlugAttached && on && isTherapyCableAttached) {
     document.getElementById('tick').play();
     if (isEnergySelectionOn == false) {
@@ -3595,7 +3542,6 @@ function errorController(errornum) {
       break;
     case 10:
       errorstatus = "Unfortunately the baby has died. You will need to speak with the family. Please review VF management and repeat the VF cases on the simulator another time. <a href=\"Tutorial.html?testnum=5&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
-
       break;
     case 11:
       errorstatus = "Unfortunately, the baby has died. You will need to speak with the family. Please review SVT management and repeat the case on the simulator another time. <a href=\"Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
