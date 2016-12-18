@@ -2416,8 +2416,6 @@ function charge() {
           document.getElementById('shockprompt').play();
         });
       }
-
-
       document.LoadingInterval = setInterval(
         function() {
           if (parseInt(document.getElementById('ShockLoadingBar').style.width) < 190) {
@@ -2425,10 +2423,6 @@ function charge() {
             document.getElementById('ShockLoadingBar').style.width = IntervalHelp + "px";
           } else {
             document.getElementById('ShockAdvised').style.display = "none";
-
-
-
-
             isCharging = false;
             clearTimeout(document.LoadingInterval);
 
@@ -2446,21 +2440,16 @@ function charge() {
 
           }
         }, chargeJoules / 9);
-
     }
   }
 }
 
-
 function shock() {
-
   dataLogString += "Shock ";
   if (on && patientState != "Sync" && patientState != "VTac" && isLeftPadConnected && isRightPadConnected && othershockbool && isElectrodesConnected && isShockReady && !isCPROn) {
-
     document.getElementById('shockprompt').pause();
     if (isShockReady && (!isCPROn)) {
       if (GetUrlValue('testnum') == 4 && isAEDOn) {
-
         TestCase1.ShockInAnalyze = true;
       }
       if (GetUrlValue('testnum') == 5 && isAEDOn) {
@@ -2480,7 +2469,6 @@ function shock() {
     isShockReady = false;
 
     if (chargeJoules > 180 && !isTestOn) {
-
       if (patientState == "VFib" && !isTestPlugAttached) {
         clearTimeout(MinDeathTimeout);
         helpController(8);
@@ -2491,28 +2479,21 @@ function shock() {
         document.getElementById('PatientInfo').innerHTML = "Continue CPR before reassessing for a pulse.";
         rhythmChange(initp, "black url('assets/NormalRate.png')");
       }
-
     }
-
     if (chargeJoules > 10 && chargeJoules < 59 && GetUrlValue('testnum') == 4) {
-
       if (patientState == "VFib" && !isTestPlugAttached && isTestOn) {
         TestCase1.TotalPoints += 15;
         helpController(8);
         HRNum = 90;
         document.getElementById('HRNum').innerHTML = HRNum;
         patientState = "NormalVFib";
-
         document.getElementById('PatientInfo').innerHTML = "Continue CPR.";
-
         clearTimeout(MinDeathTimeout);
         document.NoCPRVictory = setTimeout(function() {
           if (GetUrlValue('testnum') == 4) {
             clearTimeout(MinDeathTimeout);
             TestCase1.SurvivalStateReached = true;
             $('#hidden_field').val(JSON.stringify(TestCase1));
-
-
             TestCase1.TotalCaseTime = Math.round(new Date() / 1000 - startTime);
             if (TestCase1.TotalCaseTime > 60 * 4) {
               TestCase1.CaseTimeMoreThanFourMin = true;
@@ -2522,36 +2503,27 @@ function shock() {
             }
             sendPostData(TestCase1);
           }
-
           if (!isTestOn) {
             document.getElementById("EndDialog").innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=2&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
             document.getElementById("PatientInfo").innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=2&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
-
           }
           if (isTestOn) {
             if (GetUrlValue('testnum') == 4) {
               document.getElementById("EndDialog").innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=5&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
               document.getElementById('PatientInfo').innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=5&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
             }
-
           }
           $('#EndDialog').dialog({
             "width": 400,
             modal: true,
             autoOpen: true
           });
-
         }, 30000);
-
-
         rhythmChange(initp, "black url('assets/NormalRate.png')");
       }
 
     }
-
-
     if (chargeJoules > 10 && chargeJoules < 85 && GetUrlValue('testnum') == 5) {
-
       if (patientState == "VFib" && !isTestPlugAttached && isTestOn) {
         TestCase2.ShockAfterVFibStateTime = (Math.round((new Date() / 1000) - startTime) - TestCase2.VFibStartTime);
         helpController(8);
@@ -2566,17 +2538,9 @@ function shock() {
         document.getElementById('PatientInfo').innerHTML = "Continue CPR.";
         rhythmChange(initp, "black url('assets/NormalRate.png')");
       }
-
     }
-
-
-
     if (patientState == "VFib" && isTestOn && chargeJoules > 59 && GetUrlValue('testnum') == 4) {
-
-
       TestCase1.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
-
-
       if (TestCase1.TotalCaseTime > 60 * 4) {
         TestCase1.CaseTimeMoreThanFourMin = true;
       }
@@ -2595,16 +2559,11 @@ function shock() {
       document.getElementById('HRNum').innerHTML = HRNum;
       clearTimeout(CPRDeathTime);
       sendPostData(TestCase1);
-
-
       rhythmChange(initp, "black url('assets/DeadLine.png')");
       setTimeout(function() {
         errorController(10);
       }, 1000);
-
-
     }
-
     if (patientState == "VFib" && isTestOn && chargeJoules > 84 && GetUrlValue('testnum') == 5) {
       TestCase2.TotalCaseTime = Math.round((new Date() / 1000) - startTime);
       if (TestCase2.TotalCaseTime > 60 * 4) {
@@ -2630,37 +2589,23 @@ function shock() {
       setTimeout(function() {
         errorController(11);
       }, 1000);
-
-
     }
-
-
-
-
     setTimeout(function() {
       document.getElementById('EnergyDelivered').style.display = "none";
       document.getElementById('BottomBar').style.display = "none";
     }, 3000);
-
-
   } else if (isCPROn) {
-
     errorController(2);
   } else if (isTestPlugAttached && isShockReady) {
     clearInterval(document.syncInterval);
     document.getElementById("SyncLight").style.display = "none";
-
-
-
     if (isSyncOn && GetUrlValue('testnum') == 5) {
       rhythmChange(initp, "black url('assets/SVT.png')");
     }
     if (isSyncOn && GetUrlValue('testnum') == 3) {
       rhythmChange(initp, "black url('assets/vtac.png')");
     }
-
     isSyncOn = false;
-
 
     document.getElementById('EnergyDelivered').style.display = "block";
     isShockReady = false;
@@ -2672,11 +2617,8 @@ function shock() {
       document.getElementById('EnergyDelivered').style.display = "none";
       document.getElementById('BottomBar').style.display = "none";
     }, 3000);
-
   }
-
 }
-
 
 function speedDial() {
   if (on) {
@@ -2689,7 +2631,6 @@ function speedDial() {
       document.getElementById('shockprompt').pause();
       document.getElementById('shockprompt').src = document.getElementById('shockprompt').src;
 
-
       clearInterval(document.interval);
       document.getElementById("ShockLight").style.display = "none";
       clearTimeout(document.LoadingInterval);
@@ -2697,9 +2638,6 @@ function speedDial() {
       document.getElementById('EnergyLevel').style.display = "none";
       document.getElementById('AnalyzeLight2').style.display = "none";
       document.getElementById('AnalyzeLight1').style.display = "none";
-
-
-
     } else {
       clearTimeout(analyzeCharge);
       document.getElementById('motiondetected').pause();
@@ -2728,9 +2666,7 @@ function speedDial() {
       clearTimeout(document.chargeTimout);
       clearTimeout(document.LoadingInterval);
       document.getElementById('EnergyLevel').style.display = "none";
-
     }
-
   }
 }
 
@@ -2765,27 +2701,20 @@ function analyze() {
     document.getElementById("AnalyzeLight1").style.display = "block";
     document.getElementById("AnalyzeLight2").style.display = "block";
     if (isCPROn) {
-
       setTimeout(function() {
         if (isCPROn) {
           document.getElementById('motiondetected').play();
           document.getElementById('AnalyzeText').innerHTML = "Motion Detected -- Stop Motion";
         }
-
       }, 5000);
-
     } else if (patientState == "VFib") {
       document.getElementById('analyzingnowstandclear').addEventListener('ended', function() {
         document.getElementById('shockadvised').play();
       });
       analyzeCharge = setTimeout(function() {
-
         document.getElementById('AnalyzeLight2').style.display = "none";
-
         document.getElementById("AnalyzeMenu").style.display = "none";
         charge();
-
-
       }, 5000);
     } else if (patientState == "VTac" && !isTestOn) {
       analyzeCharge = setTimeout(function() {
@@ -2798,7 +2727,6 @@ function analyze() {
         document.getElementById("AnalyzeMenu").style.display = "none";
         charge();
         document.getElementById("CurrentJShock").innerHTML = chargeJoules + "J";
-
       }, 3000);
     } else {
       setTimeout(function() {
@@ -2806,27 +2734,20 @@ function analyze() {
         document.getElementById("noshockadvised").play();
         document.getElementById("AnalyzeText").innerHTML = "No Shock Advised";
         setTimeout(function() {
-
           document.getElementById("AnalyzeMenu").style.display = "none";
           document.getElementById('AnalyzeLight1').style.display = "none";
           document.getElementById('AnalyzeLight2').style.display = "none";
           document.getElementById("AnalyzeText").innerHTML = "Analyzing Now -- Stand Clear";
-
         }, 3000);
-
       }, 3000);
     }
   }
 }
 
-
-
-
 function pacer() {
   dataLogString += "Pacer ";
   if (on && isLeftPadConnected && isRightPadConnected && isElectrodesConnected) {
     document.getElementById('tick').play();
-
     if (!ispacerFuncOn) {
       ispacerFuncOn = true;
       if (patientState == "SlowRhythm" && isRAEKGConnected && isLAEKGConnected && isLLEKGConnected) {
@@ -2838,17 +2759,11 @@ function pacer() {
         helpController(107);
         helpController(111)
       }
-
       if (patientState != "SlowRhythm") {
         if (leadStatus == "Paddles") {
           rhythmChange(initp, "black url('assets/Flatline.png')");
-
         }
-
-
       }
-
-
       var element = document.getElementById("Paddles");
       if (element != null)
         element.parentNode.removeChild(element);
@@ -2866,7 +2781,6 @@ function pacer() {
         isPacerOn = false;
         document.getElementById("BottomPaceBar").style.display = "block";
       }, 10000);
-
 
       if (PacerCurrent == 30 && patientState == "SlowRhythm" && isLLEKGConnected && isLAEKGConnected && isRAEKGConnected) {
         rhythmChange(initp, "black url('assets/30mAPace.png')");
@@ -2898,10 +2812,8 @@ function pacer() {
       document.getElementById("PacerMenu").style.display = "none";
       ispacerFuncOn = false;
     }
-
   }
 }
-
 
 function currentLeft() {
   dataLogString += "CurrentDown ";
@@ -2917,7 +2829,6 @@ function currentLeft() {
         isPacerOn = false;
       }, 10000);
     } else {
-
       clearTimeout(document.turnPacerOff);
       document.turnPacerOff = setTimeout(function() {
         document.getElementById("BottomPaceBar").style.display = "block";
@@ -2927,7 +2838,6 @@ function currentLeft() {
         document.getElementById("HRNum").style.top = "125px";
         document.getElementById('HRNum').innerHTML = heartRate;
       }, 10000);
-
     }
     PacerCurrent = parseInt(document.getElementById("PacerText3").innerHTML) - 10;
     document.getElementById("PacerText3").innerHTML = PacerCurrent + " mA";
@@ -2936,9 +2846,7 @@ function currentLeft() {
     document.getElementById("PacerText").innerHTML = "Current";
     document.getElementById("TopAmps").innerHTML = PacerCurrent + " mA";
     document.getElementById("BottomAmps").innerHTML = PacerCurrent + " mA";
-
   }
-
 }
 
 function currentRight() {
@@ -2947,7 +2855,6 @@ function currentRight() {
     document.getElementById('tick').play();
     if (!isPacerOn) {
       document.getElementById("BottomPaceBar").style.display = "none";
-
       isPacerOn = true;
       document.getElementById("PacerMenu").style.display = "block";
       document.turnPacerOff = setTimeout(function() {
@@ -2962,7 +2869,6 @@ function currentRight() {
         isPacerOn = false;
       }, 10000);
     }
-
     PacerCurrent = parseInt(document.getElementById("PacerText3").innerHTML) + 10;
     document.getElementById("PacerText3").innerHTML = PacerCurrent + " mA";
     document.getElementById("PacerText2").style.display = "none";
@@ -2973,7 +2879,6 @@ function currentRight() {
     if (patientState == "SlowRhythm" && isLLEKGConnected && isLAEKGConnected && isRAEKGConnected) {
       if (PacerCurrent == 30) {
         rhythmChange(initp, "black url('assets/30mAPace.png')");
-
       }
       if (PacerCurrent >= 40) {
         rhythmChange(initp, "black url('assets/40mAPace.png')");
@@ -2986,7 +2891,6 @@ function currentRight() {
       }
       if (PacerCurrent >= 70) {
         rhythmChange(initp, "black url('assets/70mAPace.png')");
-
       }
       if (PacerCurrent >= 80) {
         rhythmChange(initp, "black url('assets/PaceRightRhythm.png')");
@@ -2994,7 +2898,6 @@ function currentRight() {
         patientState = "GoodWithPace";
         helpController(113);
         clearTimeout(MinDeathTimeout);
-
       }
     }
   }
@@ -3008,7 +2911,6 @@ function rateLeft() {
       document.getElementById("BottomPaceBar").style.display = "none";
       isPacerOn = true;
       document.getElementById("PacerMenu").style.display = "block";
-
       document.turnPacerOff = setTimeout(function() {
         document.getElementById('PacerMenu').style.display = "none";
         isPacerOn = false;
@@ -3021,7 +2923,6 @@ function rateLeft() {
         isPacerOn = false;
       }, 10000);
     }
-
     PacerRate = parseInt(document.getElementById("PacerText2").innerHTML) - 10;
     document.getElementById("PacerText2").innerHTML = PacerRate + " PPM";
     document.getElementById("TopRate").innerHTML = PacerRate + " PPM";
@@ -3029,10 +2930,7 @@ function rateLeft() {
     document.getElementById("PacerText2").style.display = "block";
     document.getElementById("PacerText3").style.display = "none";
     document.getElementById("PacerText").innerHTML = "Rate";
-
-
   }
-
 }
 
 function rateRight() {
@@ -3090,8 +2988,6 @@ function leadSelect() {
 
         document.getElementById('AnalyzeLight2').style.display = "none";
         document.getElementById('AnalyzeLight1').style.display = "none";
-
-
       } else {
         clearTimeout(analyzeCharge);
         document.getElementById('motiondetected').pause();
@@ -3114,37 +3010,26 @@ function leadSelect() {
         document.getElementById('AnalyzeLight1').style.display = "none";
       }
     }
-
     if (!isLeadSelectOn) {
       isLeadSelectOn = true;
       document.getElementById("LeadSelect").style.display = "block";
-
       turnLeadSelectOff = setTimeout(function() {
         document.getElementById('LeadSelect').style.display = "none";
         isLeadSelectOn = false;
       }, 5000);
-
     } else {
       clearTimeout(turnLeadSelectOff);
-
       if (leadNum < 4 && !ispacerFuncOn) {
         leadNum = leadNum + 1;
         document.getElementById("PaddlesX1").src = "assets/Lead" + (leadNum - 1) + ".png";
-
-
         leadStatus = "EKGS";
         threeEKGController();
 
       } else if (leadNum < 3 && ispacerFuncOn) {
         leadNum = leadNum + 1;
         document.getElementById("PaddlesX1").src = "assets/Lead" + (leadNum) + ".png";
-
-
         leadStatus = "EKGS";
         threeEKGController();
-
-
-
       } else {
         if (!ispacerFuncOn) {
           document.getElementById("PaddlesX1").src = "assets/PaddlesX1.png";
@@ -3152,25 +3037,20 @@ function leadSelect() {
           threeEKGController();
         } else {
           document.getElementById("PaddlesX1").src = "assets/Lead1.png";
-
           threeEKGController();
-
         }
         $("#LeadSelect ul li:nth-child(" + (leadNum) + ")").css("background-color", "gray");
         leadNum = 1;
       }
-
       $("#LeadSelect ul li:nth-child(" + (leadNum - 1) + ")").css("background-color", "gray");
       $("#LeadSelect ul li:nth-child(" + (leadNum) + ")").css("background-color", "blue");
       turnLeadSelectOff = setTimeout(function() {
         document.getElementById('LeadSelect').style.display = "none";
         isLeadSelectOn = false;
       }, 5000);
-
     }
   }
 }
-
 
 var CPRFirstTime = true;
 var CPRAfterShockFirstTime = true;
@@ -3184,18 +3064,14 @@ function CPRButton() {
         CPRFirstTime = false;
         TestCase2.TotalPoints += 5;
         TestCase1.TotalPoints += 15;
-
       }
-
       helpController(1);
       if (GetUrlValue('testnum') == 4) {
         TestCase1.TimeToStartCPR = Math.round((new Date() / 1000) - startTime);
       }
-
       if (GetUrlValue('testnum') == 5) {
         TestCase2.TimeToStartCPRAfterVFib = Math.round(((new Date() / 1000) - startTime) - TestCase2.VFibStartTime);
       }
-
     }
     if (patientState == "SlowRhythm") {
       if (GetUrlValue('testnum') == 6)
@@ -3209,18 +3085,14 @@ function CPRButton() {
       else
         errorController(8);
     }
-
     if (patientState == "NormalVFib") {
-
       if (GetUrlValue('testnum') == 4) {
         clearTimeout(document.NoCPRVictory);
-
         TestCase1.ClickedStartCPRAfterShock = true;
         if (CPRAfterShockFirstTime == true) {
           TestCase1.TotalPoints += 10;
         }
       }
-
       if (GetUrlValue('testnum') == 5) {
         TestCase2.StartedCPRAfterVFibShock = true;
         if (CPRAfterShockFirstTime == true) {
@@ -3231,14 +3103,11 @@ function CPRButton() {
           }
         }
       }
-
       document.VFibWinTimeout = setTimeout(function() {
         if (GetUrlValue('testnum') == 4) {
           clearTimeout(MinDeathTimeout);
           TestCase1.SurvivalStateReached = true;
           $('#hidden_field').val(JSON.stringify(TestCase1));
-
-
           TestCase1.TotalCaseTime = Math.round(new Date() / 1000 - startTime);
           if (TestCase1.TotalCaseTime > 60 * 4) {
             TestCase1.CaseTimeMoreThanFourMin = true;
@@ -3248,11 +3117,8 @@ function CPRButton() {
           }
           sendPostData(TestCase1);
         }
-
         if (GetUrlValue('testnum') == 5) {
           TestCase2.TotalCaseTime = Math.round(new Date() / 1000 - startTime);
-
-
           if (TestCase2.TotalCaseTime > 60 * 4) {
             TestCase2.CaseTimeMoreThanFourMin = true;
           }
@@ -3263,16 +3129,10 @@ function CPRButton() {
           clearTimeout(MinDeathTimeout);
           $('#hidden_field').val(JSON.stringify(TestCase2));
           sendPostData(TestCase2);
-
-
-
         }
-
-
         if (!isTestOn) {
           document.getElementById("EndDialog").innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=2&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
           document.getElementById("PatientInfo").innerHTML = "The patient has a pulse! He is in sinus rhythm. You have saved the patient! <a href='Tutorial.html?testnum=2&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "' >Click here to move on to the next case</a>.";
-
         }
         if (isTestOn) {
           if (GetUrlValue('testnum') == 4) {
@@ -3289,11 +3149,8 @@ function CPRButton() {
           modal: true,
           autoOpen: true
         });
-
       }, 10000);
-
     }
-
     isCPROn = true;
     $('#CPRStatus').toggle()
     flashing = setInterval(function() {
@@ -3316,18 +3173,13 @@ function CPRButton() {
       isAEDOn = false;
       analyze();
     }
-
   }
-
 }
-
-
 
 function sync() {
   dataLogString += "Sync ";
   if (on) {
     if (patientState == "VTac" || patientState == "Sync") {
-
       if (!isSyncOn) {
         helpController(208);
         isSyncOn = true;
@@ -3356,34 +3208,23 @@ function sync() {
         clearInterval(document.syncInterval);
         document.getElementById("SyncLight").style.display = "none";
 
-
-
         if (isTestOn && isLeftPadConnected && isRightPadConnected && isElectrodesConnected) {
           rhythmChange(initp, "black url('assets/SVT.png')");
         }
-
         if (isTestOn && isLAEKGConnected && isLLEKGConnected && isRAEKGConnected) {
           rhythmChange(initp, "black url('assets/SVT.png')");
         }
-
         if (!isTestOn && isLAEKGConnected && isLLEKGConnected && isRAEKGConnected) {
           rhythmChange(initp, "black url('assets/vtac.png')");
         } else if (!isTestOn && isLeftPadConnected && isRightPadConnected && isElectrodesConnected) {
           rhythmChange(initp, "black url('assets/vtac.png')");
         }
-
-
-
       }
     }
   }
 }
-
-
 function ecgController() {
-
   if (isRightPadConnected && isLeftPadConnected && isElectrodesConnected && isTherapyCableAttached) {
-
     if (GetUrlValue('testnum') == 4 && TestCase1.TimeToPadsAttached < 0) {
       TestCase1.TimeToPadsAttached = Math.round((new Date() / 1000) - startTime);
     }
@@ -3394,10 +3235,6 @@ function ecgController() {
       TestCase3.TimeToPadsAttached = Math.round((new Date() / 1000) - startTime);
     }
   }
-
-
-
-
   if (leadStatus == "Paddles") {
     if (isRightPadConnected && isLeftPadConnected && on && isElectrodesConnected && isTherapyCableAttached) {
       if (patientState == "VTac" && !isTestOn) {
@@ -3413,8 +3250,6 @@ function ecgController() {
         helpController(206);
         helpController(205);
       }
-
-
       if (patientState == "Sync" && GetUrlValue('testnum') == 5) {
         rhythmChange(initp, "black url('assets/SVTsync.png')");
       }
@@ -3422,8 +3257,6 @@ function ecgController() {
       if (patientState == "Sync" && GetUrlValue('testnum') == 2) {
         rhythmChange(initp, "black url('assets/SyncRhythm.png')");
       }
-
-
       if (patientState == "MouseOver") {
         heartRate = 80;
         rhythmChange(initp, "black url('assets/NormalRate.png')");
@@ -3439,17 +3272,13 @@ function ecgController() {
         rhythmChange(initp, "black url('assets/SlowRhythm.png')");
         helpController(104);
       }
-
       if (patientState == "Dead") {
         heartRate = 45;
         HRNum = 0;
         document.getElementById('HRNum').innerHTML = HRNum;
-
         rhythmChange(initp, "black url('assets/Deadline.png')");
         helpController(104);
-
       }
-
       document.getElementById("ConnectElectrodes").style.display = "none";
       document.getElementById("BottomBar").style.display = "none";
       document.getElementById("HRNum").style.top = "163px";
@@ -3474,8 +3303,6 @@ function ecgController() {
       clearInterval(heartBeat);
       rhythmChange(initp, "black url('assets/Flatline.png')");
     }
-
-
   } else if (isRightPadConnected && isLeftPadConnected && on && isElectrodesConnected && isTherapyCableAttached) {
     document.getElementById("ConnectElectrodes").style.display = "none";
     document.getElementById("BottomBar").style.display = "none";
@@ -3513,7 +3340,6 @@ function threeEKGController() {
     if (PacerCurrent >= 70) {
       rhythmChange(initp, "black url('assets/70mAPace.png')");
       return;
-
     }
     if (PacerCurrent >= 80) {
       rhythmChange(initp, "black url('assets/PaceRightRhythm.png')");
@@ -3522,15 +3348,9 @@ function threeEKGController() {
       return;
     }
   }
-
-
-
-
   if (leadStatus != "Paddles") {
-
     if (ekgson) {
       if (patientState == "VTac" && !isTestOn) {
-
         rhythmChange(initp, "black url('assets/vtac.png')");
       }
       if (patientState == "VTac" && isTestOn) {
@@ -3543,8 +3363,6 @@ function threeEKGController() {
         heartRate = 80;
         rhythmChange(initp, "black url('assets/NormalRate.png')");
       }
-
-
       if (patientState == "VFib") {
         rhythmChange(initp, "black url('assets/vfib.png')");
       }
@@ -3569,13 +3387,10 @@ function threeEKGController() {
         heartRate = 180;
         rhythmChange(initp, "black url('assets/vtac.png')");
       }
-
       if (patientState == "VTac" && isTestOn) {
         heartRate = 220;
         rhythmChange(initp, "black url('assets/SVT.png')");
       }
-
-
       if (patientState == "NormalVFib") {
         heartRate = 180;
         rhythmChange(initp, "black url('assets/NormalRate.png')");
@@ -3599,7 +3414,6 @@ function threeEKGController() {
             helpController(106);
           }
         }
-
       }
     } else {
       rhythmChange(initp, "black url('assets/Flatline.png')");
@@ -3613,7 +3427,6 @@ function helpController(helpState) {
     var status2;
     var status3;
 
-
     switch (helpState) {
       case 0:
         status = "First assess the patient's condition by clicking 'Assess'.";
@@ -3624,11 +3437,9 @@ function helpController(helpState) {
       case 2:
         status = "The patient is not breathing and has no pulse. The most important thing to do first is to initiate CPR immediately!<br><br> Use your mouse or touchpad to press \"Start CPR\"";
         break;
-
       case 3:
         status = "Use your mouse to drag away the black test plug and expose the grey adapter on the therapy cable."
         break;
-
       case 32:
         status = "The machine prompts you to \"Connect Electrodes\". The therapy pads are the electrodes. <br><br>Use your mouse to connect the grey adapter on the therapy cable to the grey adapter on the defibrillator pads. Move the pads into proper position on the patient. The white pad goes on the patient's upper right chest and the \"heart\" pad should be positioned just lateral to the apex of the patient's heart.";
         break;
@@ -3661,7 +3472,6 @@ function helpController(helpState) {
       case 12:
         status = "Continue CPR before reassessing for a pulse.";
         break;
-
       case 100:
         status = "First, assess the patient's condition by clicking the \"Assess Patient\" button.";
         break;
@@ -3672,7 +3482,6 @@ function helpController(helpState) {
         status = "Next you will need to connect the patient to the defibrillator to display and assess the cardiac rhythm. The \"ON\" button's green light should be visible if the machine is on. <br><br>Use your mouse to drag away the black test plug and expose the grey adapter on the therapy cable.";
         break;
       case 103:
-
         break;
       case 104:
         status = "For optimal pacing, the Lifepak's own ECG leads must be connected to the patient, because the Quik-Combo therapy pads (aka \"electrodes\") cannot monitor the patient's rhythm and deliver pacing current at the same time.<br><br> Verify the ECG leads are attached to the patient. Then press the PACER button on the defibrillator console.";
@@ -3690,7 +3499,6 @@ function helpController(helpState) {
         status = "The pacer button's green light should be on. Notice:<br>1) The machine is now automatically reading the rhythm from Lead II . This is because the pads cannot read the patient's rhythm and pace at the same time.<br> 2) A triangle \"sense\" marker appears near the middle of each QRS complex 3) Vertical pacing spikes appear at the default rate of 100/min, which is appropriate for most age groups. <br><br>Now press CURRENT, using the up arrow to increase current until a QRS complex follows each pacing spike.";
         break;
       case 111:
-
         break;
       case 112:
         status = "A heart rate of 100/min is appropriate for most age groups. The monitor should display vertical pacing spikes occuring at a rate of 100 beats/minute. <br><br>Next, press \"CURRENT\". Using the up arrows, increase the current until the monitor shows that a QRS complex immediately follows EVERY vertical pacer spike.This is called \"mechanical capture\".  Using the down arrows, adjust the current so that you are using the minimum current that will produce a QRS complex immediately following EVERY vertical pacer spike.";
@@ -3713,13 +3521,10 @@ function helpController(helpState) {
       case 202:
         status = "The \"ON\" button's green light should be visible.<br><br> Use your mouse to drag away the black test plug and expose the grey adapter on the therapy cable. "
       case 203:
-
         break;
       case 204:
-
         break;
       case 205:
-
         break;
       case 206:
         status = "Assess the rhythm. Note that the QRS complexes are fast, wide, and regular. QRS morphologies are identical and P waves are not identifiable, suggesting \"monomorphic\" ventricular tachycardia. The patient has a pulse, so this is is \"Ventricular tachycardia with a pulse\". Synchronized cardioversion is indicated.<br><br> First you will need to push \"Energy Select\" and use the arrows to select 0.5-2 Joules per kilogram body weight. "
@@ -3745,18 +3550,12 @@ function helpController(helpState) {
       case 213:
         status = "Now reassess your patient. Click \"ASSESS PATIENT\".";
         break;
-
-
     }
-
     if (status != null)
       document.getElementById("HelpInfo").innerHTML = status;
-
     if (status2 != undefined) {
-
       document.getElementById("HelpDialog2").innerHTML = status2;
     }
-
   }
 }
 
@@ -3790,7 +3589,6 @@ function errorController(errornum) {
       errorstatus = "The patient has a pulse and is crying with your compressions. Press Stop CPR.";
     case 0:
       errorstatus = "The patient has a pulse and is crying out with your compressions. Press Stop CPR.";
-
       break;
     case 9:
       errorstatus = "This rhythm calls for synchronized cardioversion. The suggested energy dose is 0.5-2 joules/kg of body weight.";
@@ -3801,25 +3599,17 @@ function errorController(errornum) {
       break;
     case 11:
       errorstatus = "Unfortunately, the baby has died. You will need to speak with the family. Please review SVT management and repeat the case on the simulator another time. <a href=\"Tutorial.html?testnum=6&sess=" + DefibSession.Id + "&user=" + DefibSession.UserId + "\"> Click here to advance to the next test case.</a>";
-
-
       break;
     case 12:
-
       errorstatus = "Unfortunately your patient has died. You will need to speak with the family. Please review how to performa transcutaneous pacing and try this case again another time. You have now completed all the test cases on this simulator.";
       break;
     case 13:
-
       errorstatus = "Unfortunately, your patient has died. You needed to offer therapy sooner. <a href='javascript:history.go(0)'>Please study cardiac rhythm management and try this case again.</a>";
-
   }
-
   if (errornum < 10) {
-
     $('#ErrorDialog').dialog({
       modal: true,
       dialogClass: "errorDialog"
-
     });
   } else {
     $("#ErrorDialog").dialog({
@@ -3828,9 +3618,6 @@ function errorController(errornum) {
       dialogClass: "errorDialog"
     });
     $('.ui-dialog-titlebar-close').hide();
-
-
-
   }
   document.getElementById("ErrorDialog").innerHTML = errorstatus
   document.getElementById('error').play();
